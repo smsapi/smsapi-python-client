@@ -60,7 +60,7 @@ class ApiResponse(object):
         return self
 
     def __next__(self):
-        return self.__next__()
+        return self.next()
         
     def next(self):
         self.index += 1
