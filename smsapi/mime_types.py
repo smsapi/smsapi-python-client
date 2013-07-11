@@ -1,0 +1,22 @@
+
+mime_types = {
+    'image/gif': '.gif',
+    'image/png': '.png',
+    'image/bmp': '.bmp',
+    'image/jpg': '.jpg',
+    'image/jpeg': '.jpeg',
+    'audio/wav': '.wav',
+    'audio/mp3': '.mp3',
+    'audio/ogg': '.ogg',
+    'text/plain': '.txt',
+    'text/csv': '.csv',
+    'text/html': '.html',
+    'video/ogv': '.ogv', 
+    'video/mp4': '.mp4',    
+    'video/mpeg': '.mpe',
+    'video/mpeg': '.mpeg',
+    'video/mpeg': '.mpg',     
+    'video/quicktime': '.mov',
+    'video/x-msvideo': '.avi',
+    'video/quicktime': '.qt',
+}
