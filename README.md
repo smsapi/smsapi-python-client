@@ -4,7 +4,7 @@ python-client
 Klient napisany w języku Python, pozwalający na wysyłanie wiadomości SMS, MMS, VMS oraz zarządzanie kontem w serwisie SMSAPI.pl
 
 EXAMPLES:
-
+```python
     from smsapi.client import SmsAPI
     from smsapi.responses import ApiError
     
@@ -29,3 +29,4 @@ EXAMPLES:
     
     except ApiError, e:
         print '%s - %s' % (e.code, e.message)
+```
