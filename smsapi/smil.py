@@ -132,7 +132,7 @@ class SmilHead(SmilElement):
         attributes = attributes or {}
                 
         if isinstance(attributes, dict):
-            attributes = {n: v for n, v in attributes.items() if n in self.__attrs__}            
+            attributes = dict((n, v) for (n, v) in attributes.items() if n in self.__attrs__)
         
         if 'id' not in attributes:    
             attributes['id'] = media.id

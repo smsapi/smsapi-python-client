@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
 import time
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase
 from smsapi.responses import ApiResponse
 
 
@@ -18,15 +19,17 @@ class ServiceMmsTestCase(SmsApiTestCase):
            'subject': 'subject',
            'date': time.time() + 360
         }
-        
+
+        dir_path = os.path.dirname(__file__)
+
         self.message_content = 'test message'
-        self.image_file = 'static/image.jpg'
-        self.video_file = 'static/video.mp4'
+        self.image_file = "%s%s" % (dir_path, '/static/image.jpg')
+        self.video_file = "%s%s" % (dir_path, '/static/video.mp4')
 
         self.message_id = None
 
     def test_send(self):
-        
+
         self.api.action('send', self.message_params)
         
         self.api.add_text(self.message_content)
@@ -34,8 +37,8 @@ class ServiceMmsTestCase(SmsApiTestCase):
         self.api.add_video(self.video_file)
 
         response = self.api.execute()
-        self.message_id = response.id        
-        
+        self.message_id = response.id
+
         self.assertIsInstance(response, ApiResponse)
         self.assertIsNotNone(response.id)
                 
@@ -50,7 +53,7 @@ class ServiceMmsTestCase(SmsApiTestCase):
         delete_response = self.api.execute()
         
         self.assertEqual(send_response.id, delete_response.id)
-        self.assertIsInstance(delete_response, ApiResponse)        
+        self.assertIsInstance(delete_response, ApiResponse)
         
     def test_get(self):
         
@@ -77,4 +80,3 @@ def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ServiceMmsTestCase))
     return suite
-    

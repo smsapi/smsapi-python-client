@@ -4,6 +4,7 @@ import unittest
 from . import SmsApiTestCase
 from smsapi.responses import ApiResponse
 
+
 class ServicePhonebookTestCase(SmsApiTestCase):
     
     def setUp(self):
@@ -106,5 +107,3 @@ def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ServicePhonebookTestCase))
     return suite
-    
-

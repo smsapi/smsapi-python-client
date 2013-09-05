@@ -14,7 +14,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name='requests',
+    name='smsapi',
     version=smsapi.__version__,
     description='Python library for manage SmsApi account via HTTP/S',
     long_description=open('README.md').read(),
@@ -33,6 +33,7 @@ setup(
         'Topic :: Communications :: Mobile messages'
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Software Development :: Libraries :: Python Modules'
+        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
     ),

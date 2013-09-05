@@ -45,7 +45,6 @@ class ServiceSenderTestCase(SmsApiTestCase):
         
         self.assertIsInstance(response, ApiResponse)
 
-    @unittest.skip('make sure account you want to set as the default is active')
     def test_sendername_default(self):
 
         self.api.action('default', {'name': 'test4'}).execute()

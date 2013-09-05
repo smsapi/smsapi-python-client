@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
 import time
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase
 from smsapi.responses import ApiResponse, ApiError
 
 
@@ -13,9 +14,11 @@ class ServiceVmsTestCase(SmsApiTestCase):
 
         self.api.service('vms')
 
+        dir_path = os.path.dirname(__file__)
+
         self.message_params = {
            'to': '111222333',
-           'content': 'static/audio2.wav',
+           'content': '%s%s' % (dir_path, '/static/audio2.wav'),
            'date': time.time() + 360
         }
 

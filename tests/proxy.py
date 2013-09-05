@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase
 from smsapi.proxy import ApiHttpProxy, ApiProxyError
+
 
 class ApiProxyTestCase(SmsApiTestCase):
 
@@ -33,5 +34,3 @@ def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ApiProxyTestCase))
     return suite
-    
-
