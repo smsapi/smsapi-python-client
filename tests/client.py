@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase
 from smsapi.responses import ApiResponse
 
 
@@ -51,7 +51,6 @@ class ServiceClientTestCase(SmsApiTestCase):
         self.assertEqual(response2.limit, 100)
         self.assertTrue(response2.active)
 
-    @unittest.skip('no json response')
     def test_subuser_details(self):
         
         self.api.action('add_subuser', {

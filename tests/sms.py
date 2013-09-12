@@ -2,7 +2,7 @@
 
 import time
 import unittest
-from tests import SmsApiTestCase
+from tests import SmsApiTestCase, PHONE_NUMBER, SEND_DELAY
 from smsapi.responses import ApiResponse
 
 
@@ -15,8 +15,8 @@ class ServiceSmsTestCase(SmsApiTestCase):
 
         self.message_params = {
            'content': 'test message',
-           'to': '111222333',
-           'date': time.time() + 360
+           'to': PHONE_NUMBER,
+           'date': time.time() + SEND_DELAY
         }
 
         self.message_id = None

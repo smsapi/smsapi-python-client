@@ -3,7 +3,7 @@
 import os
 import time
 import unittest
-from tests import SmsApiTestCase
+from tests import SmsApiTestCase, PHONE_NUMBER, SEND_DELAY
 from smsapi.responses import ApiResponse
 
 
@@ -15,9 +15,9 @@ class ServiceMmsTestCase(SmsApiTestCase):
         self.api.service('mms')
 
         self.message_params = {
-           'to': '111222333',
+           'to': PHONE_NUMBER,
            'subject': 'subject',
-           'date': time.time() + 360
+           'date': time.time() + SEND_DELAY
         }
 
         dir_path = os.path.dirname(__file__)

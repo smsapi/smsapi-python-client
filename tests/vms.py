@@ -3,7 +3,7 @@
 import os
 import time
 import unittest
-from tests import SmsApiTestCase
+from tests import SmsApiTestCase, PHONE_NUMBER, SEND_DELAY
 from smsapi.responses import ApiResponse, ApiError
 
 
@@ -17,9 +17,9 @@ class ServiceVmsTestCase(SmsApiTestCase):
         dir_path = os.path.dirname(__file__)
 
         self.message_params = {
-           'to': '111222333',
+           'to': PHONE_NUMBER,
            'content': '%s%s' % (dir_path, '/static/audio2.wav'),
-           'date': time.time() + 360
+           'date': time.time() + SEND_DELAY
         }
 
         self.message_id = None
