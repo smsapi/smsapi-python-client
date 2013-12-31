@@ -3,5 +3,5 @@
 __title__ = 'SmsApi'
 __version__ = '1.0_beta'
 __author__ = 'SMSAPI'
-__license__ = 'GPL'
+__license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2013 SMSAPI'
