@@ -30,3 +30,6 @@ EXAMPLES:
     except ApiError, e:
         print '%s - %s' % (e.code, e.message)
 ```
+
+## LICENSE
+[Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
