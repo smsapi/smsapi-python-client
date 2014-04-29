@@ -21,6 +21,7 @@ EXAMPLES:
         api.set_content('Hello [%1%] [%2%]')
         api.set_params('name', 'last name')
         api.set_to('60xxxxxxx')
+		api.set_from('Info') #Pole nadawcy lub typ wiadomość 'ECO', '2Way'
     
         result = api.execute()
     
