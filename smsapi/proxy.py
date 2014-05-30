@@ -92,7 +92,7 @@ class ApiHttpProxy(ApiProxy):
             else:
                 url = '%s/%s' % (hostname, uri)
 
-            req = Request(url, body, headers)                
+            req = Request(url, body.encode('UTF-8'), headers)
             response = urlopen(req)
 
             return response
