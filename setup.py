@@ -17,7 +17,6 @@ setup(
     name='smsapi-pozytywnie',
     version=smsapi.__version__,
     description='Python library for manage SmsApi account via HTTP/S',
-    long_description=open('README.md').read(),
     author='SMSAPI',
     author_email='bok@smsapi.pl',
     url='https://github.com/Kern3l/smsapi-python-client',
@@ -25,7 +24,6 @@ setup(
     package_data={'': ['LICENSE', 'NOTICE'], 'requests': ['*.pem']},
     package_dir={'smsapi': 'smsapi'},
     include_package_data=True,
-    license=open('LICENSE').read(),
     classifiers=(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
