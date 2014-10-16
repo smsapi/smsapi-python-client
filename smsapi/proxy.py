@@ -144,7 +144,7 @@ class ApiHttpProxy(ApiProxy):
         for (key, value) in self.data.items():
             body.write(encode('--%s\r\n' % boundary))
             body.write(encode('Content-Disposition: form-data; name="%s"' % key))
-            body.write(encode('\r\n\r\n' + value + '\r\n'))
+            body.write(encode('\r\n\r\n' + str(value) + '\r\n'))
             
         for _file in self.files:
             body.write(encode('--%s\r\n' % boundary))
