@@ -57,6 +57,11 @@ class SendAction(ApiSendAction, ApiAction):
             raise ValueError("lector is not defined")
         
         return self        
+            
+    def set_notify_url(self):
+        self._data['notify_url'] = notify_url
+            
+        return self
 
     def execute(self):
         api_response = self.proxy.execute(self.uri, self._data)
