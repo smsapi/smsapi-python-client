@@ -58,7 +58,7 @@ class SendAction(ApiSendAction, ApiAction):
         
         return self        
             
-    def set_notify_url(self):
+    def set_notify_url(self, notify_url):
         self._data['notify_url'] = notify_url
             
         return self
