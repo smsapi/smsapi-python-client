@@ -6,11 +6,10 @@ import pkgutil
 
 from smsapi.client import SmsAPI
 
-# Your API username, and password
 API_USERNAME = ''
 API_PASSWORD = ''
 
-PHONE_NUMBER = '123123123'
+PHONE_NUMBER = ''
 SEND_DELAY = 360
 
 

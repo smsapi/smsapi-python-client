@@ -4,7 +4,7 @@ import os
 import time
 import unittest
 from tests import SmsApiTestCase, PHONE_NUMBER, SEND_DELAY
-from smsapi.responses import ApiResponse, ApiError
+from smsapi.responses import ApiResponse
 
 
 class ServiceVmsTestCase(SmsApiTestCase):
@@ -27,16 +27,13 @@ class ServiceVmsTestCase(SmsApiTestCase):
     def test_send(self):
         
         self.api.action('send', self.message_params)
-        
-        try:
-            response = self.api.execute()
 
-            self.message_id = response.id        
-            
-            self.assertIsInstance(response, ApiResponse)
-            self.assertIsNotNone(response.id)            
-        except (ApiError) as e:
-            print(e.code)
+        response = self.api.execute()
+
+        self.message_id = response.id
+
+        self.assertIsInstance(response, ApiResponse)
+        self.assertIsNotNone(response.id)
 
     def test_delete(self):
         

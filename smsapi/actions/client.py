@@ -10,10 +10,10 @@ class AddSubuserAction(ApiAction):
         self._data['add_user'] = username
         
     def set_password(self, password):
-        self._data['pass'] = md5(password).hexdigest()
+        self._data['pass'] = md5(password.encode('utf-8')).hexdigest()
         
     def set_api_password(self, api_password):
-        self._data['pass_api'] = md5(api_password).hexdigest()
+        self._data['pass_api'] = md5(api_password.encode('utf-8')).hexdigest()
         
     def set_limit(self, points):
         self._data['limit'] = points

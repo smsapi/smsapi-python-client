@@ -126,7 +126,7 @@ class ApiHttpProxy(ApiProxy):
                 'Content-type': "application/x-www-form-urlencoded; charset=utf-8"
             })
             
-            data = urlencode(self.data)
+            data = urlencode(self.data).encode('utf-8')
             
         return headers, data
 

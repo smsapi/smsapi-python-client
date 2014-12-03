@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase
 from smsapi.responses import ApiResponse
 
 
@@ -44,15 +44,6 @@ class ServiceSenderTestCase(SmsApiTestCase):
         response = self.api.action('list').execute()
         
         self.assertIsInstance(response, ApiResponse)
-
-    def test_sendername_default(self):
-
-        self.api.action('default', {'name': 'test4'}).execute()
-                
-        response = self.api.action('get', {'name': 'test4'}).execute()
-        
-        self.assertIsInstance(response, ApiResponse)
-        self.assertTrue(response.default)
 
     def tearDown(self):
 

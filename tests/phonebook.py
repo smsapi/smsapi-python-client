@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from . import SmsApiTestCase
+from tests import SmsApiTestCase, PHONE_NUMBER
 from smsapi.responses import ApiResponse
 
 
@@ -63,7 +63,7 @@ class ServicePhonebookTestCase(SmsApiTestCase):
         self.group_name = 'test_group_3'         
         
         contact_data = {
-            'number': '111222333',
+            'number': PHONE_NUMBER,
             'first_name': 'test_firstname',
             'last_name': 'test_lastname',
             'info': 'test_info',
@@ -85,7 +85,7 @@ class ServicePhonebookTestCase(SmsApiTestCase):
     def test_contact_delete(self):
 
         self.api.action('contact_add', {
-            'number': '111222333',
+            'number': PHONE_NUMBER,
             'first_name': 'test_firstname',
         })
         

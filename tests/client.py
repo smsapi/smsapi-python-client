@@ -14,10 +14,10 @@ class ServiceClientTestCase(SmsApiTestCase):
         self.subuser_id = None
 
     def test_add_subuser(self):
-        
+
         self.api.action('add_subuser', {
-             'user': 'test.user.1',
-             'password': 'test.user.1' 
+             'username': 'test.user.1',
+             'password': 'test.user.1'
         })
 
         response = self.api.execute()
@@ -28,15 +28,14 @@ class ServiceClientTestCase(SmsApiTestCase):
     def test_edit_subuser(self):
         
         self.api.action('add_subuser', {
-             'user': 'test.user.2',
+             'username': 'test.user.2',
              'password': 'test.user.2' 
         })
 
         response1 = self.api.execute()
         
         self.api.action('edit_subuser', {
-             'user': 'test.user.2',
-             'limit': 100,
+             'username': 'test.user.2',
              'active': 1                                       
         })
 
@@ -48,49 +47,37 @@ class ServiceClientTestCase(SmsApiTestCase):
         self.assertFalse(response1.active)
         
         self.assertEqual(response2.status_code, 200)
-        self.assertEqual(response2.limit, 100)
         self.assertTrue(response2.active)
 
     def test_subuser_details(self):
-        
+
+        month_limit = 20.0000
+
         self.api.action('add_subuser', {
-             'user': 'test.user.3',
+             'username': 'test.user.3',
              'password': 'test.user.3',
-             'limit': 50,
-             'month_limit': 20 
+             'month_limit': month_limit
         })
-        
+
         self.api.execute()
-        
+
         self.api.action('subuser_details')
-        self.api.set_user('%s_test.user.3' % self.api_username)
-        
+        self.api.set_user('test.user.3')
+
         response = self.api.execute()
 
         self.assertIsInstance(response, ApiResponse)
-        self.assertFalse(response.active)
-        self.assertEqual(response.limit, 50)
-        self.assertEqual(response.month_limit, 20)
+        self.assertEqual(0, int(response.active))
+        self.assertEqual(month_limit, float(response.month_limit))
 
     def test_account_details(self):
-        
-        response = self.api.action('account_details').execute()
-        
-        self.assertTrue(response.points)
 
-    def test_subuser_list(self):
-        
-        response = self.api.action('list_subuser').execute()
-        
-        self.assertIsInstance(response, ApiResponse)
-        
-        for u in list:
-            print u.username
+        response = self.api.action('account_details').execute()
+
+        self.assertTrue(response.points)
 
 
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ServiceClientTestCase))
     return suite
-    
-
