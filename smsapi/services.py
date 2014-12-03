@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .actions import sms, mms, vms, sender, client, phonebook
+from .actions import sms, mms, vms, sender, client, phonebook, hlr
 
 class Service(object):
     
@@ -141,4 +141,14 @@ class ServicePhonebook(Service):
     
     def action_contact_delete(self):
         return phonebook.ContactDeleteAction(self.proxy, self.service_uri)    
-    
+
+
+class ServiceHlr(Service):
+
+    service_uri = 'hlr.do'
+
+    def __init__(self, proxy):
+        super(ServiceHlr, self).__init__(proxy)
+
+    def action_check(self):
+        return hlr.CheckAction(self.proxy, self.service_uri)
