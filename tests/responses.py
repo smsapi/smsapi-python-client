@@ -23,7 +23,7 @@ class ApiResponseTestCase(SmsApiTestCase):
                 return 200
             
             def geturl(self):
-                return 'https://ssl.smsapi.pl/'
+                return 'https://api.smsapi.pl/'
             
         self.response_obj = HttpResponse()
         
