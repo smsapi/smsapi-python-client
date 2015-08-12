@@ -40,8 +40,8 @@ EXAMPLES:
     
     
     api = SmsAPI()
-    api.set_hostname('https://api2.smsapi.pl/')
-    
+    api.set_hostname('https://api2.smsapi.pl/') #Zapasowy serwer
+
     #sending SMS
     try:
         api.service('sms').action('send')
