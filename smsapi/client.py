@@ -55,7 +55,7 @@ class SmsAPI(object):
         return self
 
     def set_hostname(self, hostname):
-        self.proxy.set_hostname(hostname)
+        self._proxy.set_hostname(hostname)
         return self
     
     def set_username(self, username):
