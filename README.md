@@ -42,6 +42,9 @@ EXAMPLES:
     api = SmsAPI()
     api.set_hostname('https://api2.smsapi.pl/') #Zapasowy serwer
 
+    api.set_username('YOUR USERNAME')
+    api.set_password('YOUR PASSWORD')
+
     #sending SMS
     try:
         api.service('sms').action('send')
