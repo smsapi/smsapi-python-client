@@ -41,3 +41,7 @@ Przykład zmiany adresu serwera na zapasowy:
 
 ## LICENSE
 [Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
+
+
+## INFO ABOUT DEPRECATED MODULES
+Module for phonebook endpoints is deprecated, please use https://github.com/smsapi/smsapi-contacts-python-client

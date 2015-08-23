@@ -2,14 +2,17 @@
 
 from .action import ApiAction
 from smsapi.responses import ApiResponse
+from smsapi.decorators import deprecated
 
 GENDERS = ('unknown', 'female', 'male')
+
 
 class GroupDetailsAction(ApiAction):
     
     def set_name(self, group_name):
         self._data['get_group'] = group_name
 
+    @deprecated()
     def execute(self):
         result = self.proxy.execute(self.uri, self._data)
         return ApiResponse(result)
@@ -17,6 +20,7 @@ class GroupDetailsAction(ApiAction):
 
 class GroupListAction(ApiAction):
 
+    @deprecated()
     def execute(self):
         self._data['list_groups'] = 1
         result = self.proxy.execute(self.uri, self._data)
@@ -31,6 +35,7 @@ class GroupAddAction(ApiAction):
     def set_info(self, info):
         self._data['info'] = info
 
+    @deprecated()
     def execute(self):
         result = self.proxy.execute(self.uri, self._data)
         return ApiResponse(result)    
@@ -47,6 +52,7 @@ class GroupEditAction(ApiAction):
     def set_info(self, info):
         self._data['info'] = info
 
+    @deprecated()
     def execute(self):
         result = self.proxy.execute(self.uri, self._data)
         return ApiResponse(result)
@@ -63,6 +69,7 @@ class GroupDeleteAction(ApiAction):
         elif 'remove_contacts' in self._data:
             del self._data['remove_contacts']
 
+    @deprecated()
     def execute(self):
         result = self.proxy.execute(self.uri, self._data)
         return ApiResponse(result)   
@@ -73,6 +80,7 @@ class ContactDetailsAction(ApiAction):
     def set_number(self, number):
         self._data['get_contact'] = number
 
+    @deprecated()
     def execute(self):
         result = self.proxy.execute(self.uri, self._data)
         return ApiResponse(result)
@@ -124,6 +132,7 @@ class ContactListAction(ApiAction):
     def set_offset(self, offset):
         self._data['offset'] = offset
 
+    @deprecated()
     def execute(self):
         self._data['list_contacts'] = 1
         
@@ -165,7 +174,11 @@ class ContactAddAction(ApiAction):
         if isinstance(groups, (list, tuple)):
             groups = ','.join(groups)
         
-        self._data['groups'] = groups        
+        self._data['groups'] = groups
+
+    @deprecated()
+    def execute(self):
+        return super(ContactAddAction, self).execute()
 
 
 class ContactEditAction(ContactAddAction):
@@ -173,9 +186,16 @@ class ContactEditAction(ContactAddAction):
     def set_number(self, number):
         self._data['edit_contact'] = number
 
+    @deprecated()
+    def execute(self):
+        return super(ContactEditAction, self).execute()
+
 
 class ContactDeleteAction(ApiAction):
     
     def set_number(self, number):
         self._data['delete_contact'] = number
-        
+
+    @deprecated()
+    def execute(self):
+        return super(ContactDeleteAction, self).execute()
