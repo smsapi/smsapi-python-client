@@ -27,7 +27,7 @@ setup(
     include_package_data=True,
     license=open('LICENSE').read(),
     classifiers=(
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: Apache 2.0',
         'Topic :: Communications :: Mobile messages'
