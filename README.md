@@ -32,5 +32,16 @@ EXAMPLES:
         print '%s - %s' % (e.code, e.message)
 ```
 
+Przykład zmiany adresu serwera na zapasowy:
+
+```python
+    api = SmsAPI()
+    api.set_hostname('https://api2.smsapi.pl/') #Zapasowy serwer
+```
+
 ## LICENSE
 [Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
+
+
+## INFO ABOUT DEPRECATED MODULES
+Module for phonebook endpoints is deprecated, please use https://github.com/smsapi/smsapi-contacts-python-client
