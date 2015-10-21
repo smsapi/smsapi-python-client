@@ -7,14 +7,13 @@ EXAMPLES:
 ```python
     from smsapi.client import SmsAPI
     from smsapi.responses import ApiError
-    
-    
+
     api = SmsAPI()
     
-    api.set_username('YOUR USERNAME')
-    api.set_password('YOUR PASSWORD')
+    api.set_username('your_username')
+    api.set_password('your_api_password')
 
-    #sending SMS
+    #send sms
     try:
         api.service('sms').action('send')
     
@@ -31,6 +30,9 @@ EXAMPLES:
     except ApiError, e:
         print '%s - %s' % (e.code, e.message)
 ```
+
+więcej przykładów znajduje się w katalogu 'examples'
+
 
 Przykład zmiany adresu serwera na zapasowy:
 
