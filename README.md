@@ -10,10 +10,13 @@ EXAMPLES:
 
     api = SmsAPI()
     
-    api.set_username('your_username')
-    api.set_password('your_api_password')
+    # autoryzacyja standardowa
+    api.set_username('your-username')
+    api.set_password('your-api-password')
+    
+    # lub za pomocą tokenu
+    api.auth_token = 'your-api-token'
 
-    #send sms
     try:
         api.service('sms').action('send')
     

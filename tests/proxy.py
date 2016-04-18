@@ -11,13 +11,6 @@ class ApiProxyTestCase(SmsApiTestCase):
         
         self.proxy = ApiHttpProxy('https://api.smsapi.pl/')
 
-    def test_connection(self):
-        result = self.proxy.execute()
-        
-        self.assertTrue(result.read)
-        self.assertTrue(result.getcode)
-        self.assertTrue(result.geturl)
-
     def test_invalid_multiple_hosts_connection(self):
 
         self.proxy.set_hostname(('host1', 'host2', 'host3'))

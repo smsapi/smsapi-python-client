@@ -3,6 +3,7 @@
 import os
 import sys
 import mimetypes
+import base64
 from io import BytesIO
 
 try:
@@ -38,6 +39,8 @@ class ApiProxy(object):
         super(ApiProxy, self).__init__()
 
         self.hostname = hostname
+
+        self.auth = None
 
         self.data = data or {}
 
@@ -111,9 +114,13 @@ class ApiHttpProxy(ApiProxy):
             'User-Agent': self.user_agent,
         }
 
-        if isinstance(self.data, dict):
-            self.data.update(self.data)     
-        
+        if isinstance(self.auth, tuple) and len(self.auth) == 2:
+            auth_str = 'Basic ' + base64.encodestring('%s:%s' % self.auth).strip()
+        else:
+            auth_str = 'Bearer %s' % self.auth
+
+        headers['Authorization'] = auth_str
+
         if self.files:
             content_type, data = self.encode_multipart_data()
 
@@ -122,10 +129,8 @@ class ApiHttpProxy(ApiProxy):
                 'Content-Length': str(len(data))
             })
         else:
-            headers.update({
-                'Content-type': "application/x-www-form-urlencoded; charset=utf-8"
-            })
-            
+            headers['Content-type'] = "application/x-www-form-urlencoded; charset=utf-8"
+
             data = urlencode(self.data).encode('utf-8')
             
         return headers, data
