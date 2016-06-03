@@ -115,8 +115,9 @@ class ApiHttpProxy(ApiProxy):
         }
 
         if isinstance(self.auth, tuple) and len(self.auth) == 2:
-            # bug
-            auth_str = 'Basic ' + base64.encodestring('%s:%s' % self.auth).strip()
+            auth_str = '%s:%s' % self.auth
+            base64_auth = base64.b64encode(auth_str.encode('utf-8'))
+            auth_str = 'Basic ' + base64_auth.strip().decode('ascii')
         else:
             auth_str = 'Bearer %s' % self.auth
 
