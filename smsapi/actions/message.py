@@ -35,7 +35,7 @@ class ApiSendAction(object):
             return (len(string) <= 36 and string.isalnum())
                 
         if isinstance(idx, (list, tuple)):
-            self._data = "|".join([i for i in idx if check_string(i)])
+            self._data['idx'] = "|".join([i for i in idx if check_string(i)])
         elif check_string(idx):
             self._data['idx'] = idx
             
