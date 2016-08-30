@@ -22,9 +22,6 @@ setup(
     author_email='bok@smsapi.pl',
     url='https://github.com/smsapi/python-client',
     packages=['smsapi', 'smsapi.actions'],
-    package_data={'': ['LICENSE', 'NOTICE'], 'requests': ['*.pem']},
-    package_dir={'smsapi': 'smsapi'},
-    include_package_data=True,
     license=open('LICENSE').read(),
     classifiers=(
         'Development Status :: 5 - Production/Stable',
