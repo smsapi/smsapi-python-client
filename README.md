@@ -44,6 +44,12 @@ Przykład zmiany adresu serwera na zapasowy:
     api.set_hostname('https://api2.smsapi.pl/') #Zapasowy serwer
 ```
 
+Ustawienie rodzaju wiadomości na "fast" (wysyłane z priorytetem):
+
+```python
+    api.set_fast(True)
+```
+
 ## LICENSE
 [Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
 
