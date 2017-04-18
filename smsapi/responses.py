@@ -43,7 +43,11 @@ class ApiResponse(object):
                 raise ApiError(data)
 
             self.count = data.get('count')
-            
+            # fields received for details=1
+            self.message = data.get('message')
+            self.length = data.get('length')
+            self.parts = data.get('parts')
+
             if 'list' in data:
                 self.data = data.get('list')
             else:

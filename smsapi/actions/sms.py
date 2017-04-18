@@ -54,7 +54,18 @@ class SendAction(ApiSendAction, ApiAction):
                         
         return self
                                                   
-    def set_date_validate(self, date_validate=True):   
+    def set_test(self, test=True):
+        if not test:
+            try:
+                del self._data['test']
+            except KeyError:
+                pass
+        else:
+            self._data['test'] = 1
+
+        return self
+
+    def set_date_validate(self, date_validate=True):
         if not date_validate:   
             try: 
                 del self._data['date_validate']
