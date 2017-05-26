@@ -28,10 +28,10 @@ EXAMPLES:
         result = api.execute()
     
         for r in result:
-            print r.id, r.points, r.status
+            print(r.id, r.points, r.status)
     
-    except ApiError, e:
-        print '%s - %s' % (e.code, e.message)
+    except ApiError as e:
+        print('%s - %s' % (e.code, e.message))
 ```
 
 więcej przykładów znajduje się w katalogu 'examples'
