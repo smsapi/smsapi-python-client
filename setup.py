@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-from smsapi import __version__, __name__
+from smsapi import version, name
 
 from setuptools import setup, find_packages
 
 setup(
-    name=__name__,
-    version=__version__,
+    name=name,
+    version=version,
     description='SmsAPI client',
     long_description=open('README.md').read(),
     author='SMSAPI',
