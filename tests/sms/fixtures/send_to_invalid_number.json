@@ -1,0 +1,14 @@
+{
+  "status_code": 200,
+  "response": {
+    "invalid_numbers": [
+      {
+        "number": "48100200300",
+        "submitted_number": "48100200300",
+        "message": "Invalid phone number"
+      }
+    ],
+    "error": 13,
+    "message": "No correct phone numbers"
+  }
+}

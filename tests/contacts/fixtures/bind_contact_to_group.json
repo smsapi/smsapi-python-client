@@ -1,0 +1,19 @@
+{
+    "status_code": 201,
+    "response": {
+        "size": 1,
+        "collection": [
+            {
+              "id": "5576cbf90cf2f41201a193ad",
+              "name": "group1",
+              "contacts_count": 1,
+              "date_created": "2016-11-26T16:25:00+01:00",
+              "date_updated": "2016-11-26T16:25:00+01:00",
+              "description": "group1",
+              "created_by": "j.doe",
+              "idx": null,
+              "permissions": []
+            }
+        ]
+    }
+}

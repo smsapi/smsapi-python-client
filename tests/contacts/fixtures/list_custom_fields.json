@@ -1,0 +1,13 @@
+{
+    "status_code": 200,
+    "response": {
+        "size": 1,
+        "collection": [
+            {
+                "id": "5576d8e00cf2f41201a193b0",
+                "name": "test",
+                "type": "TEXT"
+            }
+        ]
+    }
+}

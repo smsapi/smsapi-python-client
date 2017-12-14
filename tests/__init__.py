@@ -1,36 +1,63 @@
 # -*- coding: utf-8 -*-
 
-import sys
+import os
+import json
 import unittest
 import pkgutil
+import requests
 
-from smsapi.client import SmsAPI
+from smsapi.api import Api
+from smsapi.client import SmsApiPlClient
+from smsapi.models import ResultCollection
+from smsapi.sms import response_format_param
 
-API_USERNAME = ''
-API_PASSWORD = ''
+from tests.doubles import ApiSpy, request_fake
+from tests.fixtures import create_send_result
 
-PHONE_NUMBER = ''
-SEND_DELAY = 360
+requests.request = request_fake
 
 
 class SmsApiTestCase(unittest.TestCase):
-        
+
     def setUp(self):
+        self.request_fake = request_fake
 
-        self.api_username = API_USERNAME
-        self.api_password = API_PASSWORD
-        
-        self.api = SmsAPI()
+        self.client = SmsApiPlClient(access_token='some-access-token')
 
-        self.api.set_username(self.api_username)
-        self.api.set_password(self.api_password)
+        spy_endpoints(self.client)
 
-    if sys.version_info[:2] == (2, 6):
-        def assertIsInstance(self, x, y):
-            assert isinstance(x, y), "%r is not instance of %r" % (x, y)
+    def load_fixture(self, dir, fixture):
+        with open(os.path.abspath(os.path.dirname(__file__)) + '/%s/fixtures/%s.json' % (dir, fixture)) as f:
+            data = f .read()
 
-        def assertIsNotNone(self, x):
-            assert x is not None, "%x is None" % x
+        return json.loads(data)
+
+    def assertParamsForwardedToRequestEquals(self, params, *args):
+        for d in args:
+            params.update(d or {})
+
+        params.update(response_format_param)
+
+        if self.request_fake.http_method is 'GET':
+            data_sent = self.request_fake.params
+        else:
+            data_sent = self.request_fake.data
+
+        self.assertEqual(params, data_sent)
+
+    def assertSendResultForNumberEquals(self, number, result):
+        numbers = number if isinstance(number, list) else [number]
+
+        expected_result = ResultCollection(len(numbers), [create_send_result(n) for n in numbers])
+
+        self.assertEqual(expected_result, result)
+
+
+def spy_endpoints(client):
+
+    for attr in client.__dict__:
+        if isinstance(client.__dict__[attr], Api):
+            client.__dict__[attr] = ApiSpy(client.__dict__[attr])
 
 
 def import_from_string(name):
@@ -43,9 +70,9 @@ def import_from_string(name):
     return getattr(__import__(module, None, None, [pkg]), pkg)
 
 
-def app_test_suites():
+def app_test_suites(module_name):
 
-    module = import_from_string(__name__)
+    module = import_from_string(module_name)
 
     path = getattr(module, '__path__', None)
 
@@ -55,21 +82,22 @@ def app_test_suites():
     basename = module.__name__ + '.'
 
     for importer, module_name, is_pkg in pkgutil.iter_modules(path):
-        mod = basename + module_name
+        module_name = basename + module_name
 
-        module = import_from_string(mod)
+        if is_pkg:
+            for suite in app_test_suites(module_name):
+                yield suite
+
+        module = import_from_string(module_name)
 
         if hasattr(module, 'suite'):
             yield module.suite()
 
 
 def suite():
-
     suite = unittest.TestSuite()
-
-    for _suite in app_test_suites():
+    for _suite in app_test_suites(__name__):
         suite.addTest(_suite)
-
     return suite
 
 

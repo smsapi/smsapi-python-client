@@ -1,0 +1,12 @@
+{
+  "status_code": 201,
+  "response": {
+    "username": "some",
+    "limit": 0,
+    "month_limit": 0,
+    "senders": 0,
+    "phonebook": 0,
+    "active": false,
+    "info": "some"
+  }
+}

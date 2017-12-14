@@ -1,58 +1,72 @@
-﻿python-client
+﻿smsapi-python
 =============
 
-Klient napisany w języku Python, pozwalający na wysyłanie wiadomości SMS, MMS, VMS oraz zarządzanie kontem w serwisie SMSAPI.pl
+Client for SMSAPI.
 
-EXAMPLES:
+## COMPATIBILITY:
+Compatible with Python 2.7+, 3.+.
+
+## REQUIREMENTS:
+requests
+
+## INSTALLATION:
+If You have pip installed:
+
+    sudo pip install smsapi-python
+
+else You can install manually:
+
+    git clone https://github.com/smsapi/smsapi-python.git
+
+    cd smsapi-python
+
+    python setup.py install
+
+## Client instance:
+
+If You are smsapi.pl customer You should import
 ```python
-    from smsapi.client import SmsAPI
-    from smsapi.responses import ApiError
+    from smsapi.client import SmsApiPlClient
+```
 
-    api = SmsAPI()
+else You need to use client for smsapi.com
+```python
+    from smsapi.client import SmsApiComClient
+```
+
+## Credentials
+
+- Access Token
+```python
+    client = SmsApiPlClient(access_token='your-access-token')
+```
+
+### Examples
+
+- Send SMS
+```python
+    from smsapi.client import SmsApiPlClient
     
-    # autoryzacyja standardowa
-    api.set_username('your-username')
-    api.set_password('your-api-password')
+    client = SmsApiPlClient(access_token='your access token')
     
-    # lub za pomocą tokenu
-    api.auth_token = 'your-api-token'
+    r = client.sms.send(to='phone number', message='text message')
+    
+    print(r.id, r.points, r.status, r.error)
+```
+
+- **You can find more examples in "examples" directory in project files.**
+
+
+#### Error handling
+
+```python
+    from smsapi.exception import SmsApiException
 
     try:
-        api.service('sms').action('send')
-    
-        api.set_content('Hello [%1%] [%2%]')
-        api.set_params('name', 'last name')
-        api.set_to('60xxxxxxx')
-        api.set_from('Info') #Pole nadawcy lub typ wiadomość 'ECO', '2Way'
-    
-        result = api.execute()
-    
-        for r in result:
-            print(r.id, r.points, r.status)
-    
-    except ApiError as e:
-        print('%s - %s' % (e.code, e.message))
-```
-
-więcej przykładów znajduje się w katalogu 'examples'
-
-
-Przykład zmiany adresu serwera na zapasowy:
-
-```python
-    api = SmsAPI()
-    api.set_hostname('https://api2.smsapi.pl/') #Zapasowy serwer
-```
-
-Ustawienie rodzaju wiadomości na "fast" (wysyłane z priorytetem):
-
-```python
-    api.set_fast(True)
+        contact = client.sms.send(to='123123')
+    except SmsApiException as e:
+        print(e.message, e.code)
 ```
 
 ## LICENSE
-[Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
-
-
-## INFO ABOUT DEPRECATED MODULES
-Module for phonebook endpoints is deprecated, please use https://github.com/smsapi/smsapi-contacts-python-client
+[Apache 2.0 License](https://github.com/smsapi/smsapi-python/blob/master/LICENSE)

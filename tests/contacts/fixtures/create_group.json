@@ -1,0 +1,22 @@
+{
+    "status_code": 201,
+    "response": {
+        "id": "5576cbf90cf2f41201a193ad",
+        "name": "group1",
+        "contacts_count": 0,
+        "date_created": "2015-06-09T13:20:25+02:00",
+        "date_updated": "2015-06-09T13:20:25+02:00",
+        "description": "group1",
+        "created_by": "j.doe",
+        "idx": null,
+        "permissions": [
+            {
+                "username": "j.doe",
+                "group_id": "5576cbf90cf2f41201a193ad",
+                "write": true,
+                "read": true,
+                "send": true
+            }
+        ]
+    }
+}

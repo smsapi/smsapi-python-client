@@ -1,113 +1,54 @@
 # -*- coding: utf-8 -*-
 
-import hashlib
-from . import services
-from .proxy import ApiHttpProxy
+from requests.auth import HTTPBasicAuth
+
+from smsapi.account.api import Account
+from smsapi.auth import BearerAuth
+from smsapi.contacts.api import Contacts
+from smsapi.exception import ClientException
+from smsapi.hrl.api import Hlr
+from smsapi.mms.api import Mms
+from smsapi.push.api import Push
+from smsapi.sender.api import Sender
+from smsapi.short_url.api import ShortUrl
+from smsapi.sms.api import Sms
+from smsapi.vms.api import Vms
 
 
-class SmsAPI(object):
-    
-    def __init__(self, username=None, password=None, **kwargs):
-        super(SmsAPI, self).__init__()
+class Client(object):
 
-        self.api_url = 'https://api.smsapi.pl/'
+    def __init__(self, domain, access_token=None, **kwargs):
+        super(Client, self).__init__()
 
-        self.response_format = 'json'
+        self.domain = domain
 
-        self.username = username
-        
-        self.password = password
-        
-        self.auth_token = kwargs.get('auth_token')
+        username = kwargs.get('username')
+        password = kwargs.get('password')
 
-        self._service = None
+        if not any((access_token, username, password)):
+            raise ClientException('Credentials are required.')
 
-        self._action = None
-        
-        self._reset = True
+        self.auth = BearerAuth(access_token) if access_token else HTTPBasicAuth(username, password)
 
-        self._proxy = ApiHttpProxy(self.api_url)
-    
-    def service(self, name):
-        service_name = 'Service%s' % name.title()
+        self.sms = Sms(self)
+        self.account = Account(self)
+        self.contacts = Contacts(self)
+        self.sender = Sender(self)
+        self.shorturl = ShortUrl(self)
 
-        try:
-            self._service = getattr(services, service_name)(self._proxy)
-        except AttributeError:
-            raise AttributeError('Unrecognized service name %s' % service_name)
-        
-        return self
-    
-    def action(self, action=None, data=None):
-        if not self._service:
-            raise RuntimeError('Choose service first.')
 
-        action_name = 'action_%s' % action.lower()
+class SmsApiPlClient(Client):
 
-        if hasattr(self._service, action_name):
-            self._action = getattr(self._service, action_name)()
+    def __init__(self, **kwargs):
+        super(SmsApiPlClient, self).__init__('https://api.smsapi.pl/', **kwargs)
 
-            if data:
-                self._action.data(data)
-        else:
-            raise ValueError('Action not exist.')
-        
-        return self
+        self.mms = Mms(self)
+        self.vms = Vms(self)
+        self.hlr = Hlr(self)
+        self.push = Push(self)
 
-    def set_hostname(self, hostname):
-        self._proxy.set_hostname(hostname)
-        return self
-    
-    def set_username(self, username):
-        self.username = username
-        return self
 
-    def set_password(self, password, encode=True):
-        if encode:
-            self.password = self.hash(password)
-        else:
-            self.password = password
+class SmsApiComClient(Client):
 
-        return self
-
-    def set_proxy(self, proxy):
-        if not isinstance(proxy, proxy.ApiProxy):
-            raise TypeError('Invalid type.')
-        self._proxy = proxy
-
-        return self
-
-    def hash(self, string):
-        string = string.encode('utf-8')
-        return hashlib.md5(string).hexdigest()
-
-    def reset(self, reset=True):
-        self._reset = reset
-        return self
-
-    def execute(self):
-        if self.auth_token:
-            self._proxy.auth = self.auth_token
-        else:
-            self._proxy.auth = (self.username, self.password)
-
-        self._proxy.data.update({
-            'format': self.response_format
-        })
-        
-        result = self._action.execute()
-
-        if self._reset:
-            self._action.clear()
-            self._proxy.data.clear()
-
-        self._reset = True
-
-        return result
-
-    def __getattr__(self, name):
-        if self._action and hasattr(self._action, name):
-            return getattr(self._action, name)
-        else:
-            raise AttributeError(name)
-
+    def __init__(self, **kwargs):
+        super(SmsApiComClient, self).__init__('https://api.smsapi.com/', **kwargs)

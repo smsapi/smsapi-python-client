@@ -1,0 +1,11 @@
+{
+  "status_code": 201,
+  "response": {
+    "points": 100.00,
+    "proCount": 606,
+    "ecoCount": 1428,
+    "mmsCount": 333,
+    "vmsGsmCount": 476,
+    "vmsLandCount": 714
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status_code": 200,
+  "response": {
+    "size": 1,
+    "collection": [
+      {
+        "id": "1",
+        "name": "test1",
+        "url": "http://invoid.pl",
+        "short_url": "http://idz.do/test1",
+        "filename": null,
+        "type": "URL",
+        "expire": "2037-12-02T15:14:36+00:00",
+        "hits": 0,
+        "hits_unique": 0,
+        "description": "test1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "status_code": 201,
+    "response": {
+        "id": "5576caf00cf2f41201a193ac",
+        "idx": null,
+        "first_name": "Jon",
+        "last_name": "Doe",
+        "birthday_date": "1986-10-04",
+        "phone_number": "48987654321",
+        "gender": "male",
+        "city": null,
+        "email": "jondoe@somedomain.com",
+        "source": null,
+        "date_created": "2015-06-09T13:16:00+02:00",
+        "date_updated": "2015-06-09T13:16:00+02:00",
+        "description": "Jon Doe"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "status_code": 200,
+    "response": {
+        "username": "j.doe1",
+        "group_id": "5576cbf90cf2f41201a193ad",
+        "write": true,
+        "read": true,
+        "send": false
+    }
+}

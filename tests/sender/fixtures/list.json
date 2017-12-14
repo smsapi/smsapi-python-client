@@ -1,0 +1,15 @@
+{
+    "status_code": 201,
+    "response": [
+      {
+        "name": "any",
+        "status": "ACTIVE",
+        "default": false
+      },
+      {
+        "name": "some",
+        "status": "ACTIVE",
+        "default": false
+      }
+    ]
+}

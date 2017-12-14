@@ -1,39 +1,33 @@
 #!/usr/bin/env python
 
-#         _/_/_/                              _/_/    _/_/_/    _/_/_/   
-#      _/        _/_/_/  _/_/      _/_/_/  _/    _/  _/    _/    _/      
-#       _/_/    _/    _/    _/  _/_/      _/_/_/_/  _/_/_/      _/       
-#          _/  _/    _/    _/      _/_/  _/    _/  _/          _/        
-#   _/_/_/    _/    _/    _/  _/_/_/    _/    _/  _/        _/_/_/  
+from smsapi import __version__, __name__
 
-import smsapi
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='smsapi-client',
-    version=smsapi.__version__,
-    description='Python client for manage SmsApi account.',
+    name=__name__,
+    version=__version__,
+    description='SmsAPI client',
     long_description=open('README.md').read(),
     author='SMSAPI',
     author_email='bok@smsapi.pl',
-    url='https://github.com/smsapi/python-client',
-    packages=['smsapi', 'smsapi.actions'],
+    url='https://github.com/smsapi/smsapi-python-client',
+    packages=find_packages(),
     license=open('LICENSE').read(),
+    install_requires=[
+        'requests',
+    ],
     classifiers=(
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: Apache 2.0',
-        'Topic :: Communications :: Mobile messages'
-        'Topic :: Internet :: WWW/HTTP',
         'Topic :: Software Development :: Libraries :: Python Modules'
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3'
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ),
     test_suite='tests.suite'
 )

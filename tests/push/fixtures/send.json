@@ -1,0 +1,34 @@
+{
+  "status_code": 200,
+  "response": {
+    "id": "1",
+    "app_id": "1",
+    "status": "QUEUED",
+    "date_created": "1460969712",
+    "scheduled_date": "1460969712",
+    "payload": {
+      "alert": "message"
+    },
+    "summary": {
+      "points": "0.1",
+      "recipients_count": 1,
+      "error_code": null
+    },
+    "dispatch_details": {
+      "channels": [],
+      "device_ids": [],
+      "device_type": []
+    },
+    "fallback": {
+      "message": "sms message",
+      "from": "default",
+      "delay": 360,
+      "status": null
+    },
+    "app": {
+      "id": "1",
+      "name": "app1",
+      "icon": null
+    }
+  }
+}

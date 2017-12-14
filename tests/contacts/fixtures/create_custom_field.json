@@ -1,0 +1,8 @@
+{
+    "status_code": 201,
+    "response": {
+        "id": "5576d8e00cf2f41201a193b0",
+        "name": "test",
+        "type": "TEXT"
+    }
+}
