@@ -41,7 +41,7 @@ else You need to use client for smsapi.com
     client = SmsApiPlClient(access_token='your-access-token')
 ```
 
-### Examples
+## Examples
 
 - Send SMS
 ```python
@@ -57,7 +57,7 @@ else You need to use client for smsapi.com
 - **You can find more examples in "examples" directory in project files.**
 
 
-#### Error handling
+## Error handling
 
 ```python
     from smsapi.exception import SmsApiException
