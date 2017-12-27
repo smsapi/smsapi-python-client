@@ -12,11 +12,11 @@ requests
 ## INSTALLATION:
 If You have pip installed:
 
-    sudo pip install smsapi-python
+    sudo pip install smsapi-client
 
 else You can install manually:
 
-    git clone https://github.com/smsapi/smsapi-python.git
+    git clone https://github.com/smsapi/smsapi-python-client.git
 
     cd smsapi-python
 
@@ -69,4 +69,4 @@ else You need to use client for smsapi.com
 ```
 
 ## LICENSE
-[Apache 2.0 License](https://github.com/smsapi/smsapi-python/blob/master/LICENSE)
+[Apache 2.0 License](https://github.com/smsapi/smsapi-python-client/blob/master/LICENSE)
