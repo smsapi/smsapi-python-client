@@ -5,7 +5,6 @@ import unittest
 from smsapi.exception import EndpointException, SendException
 from smsapi.models import ResultCollection, RemoveMessageResult, InvalidNumber
 from smsapi.sms.api import flash_force_params, fast_force_params
-from smsapi.utils import convert_to_utf8_str
 from tests import SmsApiTestCase
 from tests.doubles import api_response_fixture
 
@@ -108,6 +107,15 @@ class SmsApiTest(SmsApiTestCase):
         self.client.sms.send_to_group(group='any')
 
         self.assertParamsForwardedToRequestEquals({'group': 'any'})
+
+    def test_send_sms_as_utf8(self):
+        number = '48100200300'
+        args = {'to': number, 'encoding': 'utf-8'}
+
+        result = self.client.sms.send(**args)
+
+        self.assertSendResultForNumberEquals(number, result)
+        self.assertParamsForwardedToRequestEquals(args)
 
 
 def create_sms_exception_for_number(number):

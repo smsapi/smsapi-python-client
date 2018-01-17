@@ -10,7 +10,7 @@ from smsapi.utils import join_params
 sms_parameters = [
     'message',
     'from',
-    'encoding'
+    'encoding',
     'details',
     'template',
     'date',
