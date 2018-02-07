@@ -23,7 +23,7 @@ short_url_parameters = [
 
 def parameters_transformer(_, parameters):
     if 'file' in parameters:
-        parameters['file'] = {'file': open(parameters.get('file'), 'rb')}
+        parameters['__files'] = {'file': open(parameters.pop('file'), 'rb')}
     return parameters
 
 

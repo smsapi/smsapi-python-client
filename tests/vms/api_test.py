@@ -29,6 +29,13 @@ class VmsApiTest(SmsApiTestCase):
 
         self.assertEqual(open(wave_file_path, 'rb').read(), self.request_fake.files.get('file').read())
 
+    def test_send_vms_from_remote_file(self):
+        args = {'to': '48100200300', 'file': 'http://somedomain.com/somefile.wav'}
+
+        self.client.vms.send(**args)
+
+        self.assertParamsForwardedToRequestEquals(args)
+
     def test_send_vms_with_own_identifiers(self):
         number = '48100200300'
         args = {'to': number, 'idx': ['id1', 'id2']}

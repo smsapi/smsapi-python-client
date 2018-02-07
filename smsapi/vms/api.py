@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
@@ -26,8 +27,8 @@ accept_parameters = [
 def parameters_transformer(_, parameters):
     join_params(parameters, ['idx'], '|')
 
-    if 'file' in parameters:
-        parameters['file'] = {'file': open(parameters.get('file'), 'rb')}
+    if 'file' in parameters and os.path.isfile(parameters.get('file')):
+        parameters['__files'] = {'file': open(parameters.pop('file'), 'rb')}
 
     return parameters
 

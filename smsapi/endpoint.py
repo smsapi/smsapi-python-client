@@ -79,7 +79,7 @@ def bind_api_endpoint(**config):
                 'X-Request-Id': str(uuid.uuid4())
             }
 
-            files = self.parameters.pop('file', None)
+            files = self.parameters.pop('__files', None)
 
             kwargs = {
                 'auth': self.api.client.auth,
