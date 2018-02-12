@@ -34,6 +34,8 @@ def bind_api_endpoint(**config):
 
             self.api = api
 
+            self.files = None
+
             self.parameters = parameters
 
             self.filter_parameters()
@@ -79,12 +81,10 @@ def bind_api_endpoint(**config):
                 'X-Request-Id': str(uuid.uuid4())
             }
 
-            files = self.parameters.pop('__files', None)
-
             kwargs = {
                 'auth': self.api.client.auth,
                 'headers': headers,
-                'files': files}
+                'files': self.files}
 
             if self.method is 'GET':
                 kwargs.update({'params': self.parameters})
@@ -115,6 +115,9 @@ def bind_api_endpoint(**config):
                 response = self.response_mapping.from_dict(response, raw_response=raw_response)
 
             return response
+
+        def add_file(self, file):
+            self.files = {'file': file}
 
     def __call(api, **kwargs):
         endpoint = ApiEndpoint(api, kwargs)

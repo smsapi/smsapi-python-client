@@ -24,11 +24,11 @@ accept_parameters = [
 ]
 
 
-def parameters_transformer(_, parameters):
+def parameters_transformer(api_endpoint, parameters):
     join_params(parameters, ['idx'], '|')
 
     if 'file' in parameters and os.path.isfile(parameters.get('file')):
-        parameters['__files'] = {'file': open(parameters.pop('file'), 'rb')}
+        api_endpoint.add_file(open(parameters.pop('file'), 'rb'))
 
     return parameters
 

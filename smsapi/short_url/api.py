@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException
@@ -21,9 +23,9 @@ short_url_parameters = [
 ]
 
 
-def parameters_transformer(_, parameters):
-    if 'file' in parameters:
-        parameters['__files'] = {'file': open(parameters.pop('file'), 'rb')}
+def parameters_transformer(api_endpoint, parameters):
+    if 'file' in parameters and os.path.isfile(parameters.get('file')):
+        api_endpoint.add_file(open(parameters.pop('file'), 'rb'))
     return parameters
 
 
