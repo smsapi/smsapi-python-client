@@ -40,7 +40,7 @@ class GroupModel(Model):
 
         self.id = kwargs.get('id')
         self.name = kwargs.get('name')
-        self.contacts_count = kwargs.get('contact_count')
+        self.contacts_count = kwargs.get('contacts_count')
         self.date_created = kwargs.get('date_created')
         self.date_updated = kwargs.get('date_updated')
         self.description = kwargs.get('description')
