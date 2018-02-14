@@ -22,20 +22,56 @@ class Model(object):
         return not self.__eq__(other)
 
 
-class ModelCollection(list):
+class ModelCollection(object):
+
+    def __init__(self, size, collection):
+        super(ModelCollection, self).__init__()
+
+        self.size = size
+
+        self.collection = collection
+
+        self._current = None
+        self._index = 0
 
     @classmethod
-    def parse(cls, iterable, model):
-        collection = cls()
+    def parse(cls, response, model):
 
-        if isinstance(iterable, dict):
-            iterable = iterable.get('collection', [])
+        size = None
+        collection = response
 
-        for data in iterable:
-            m = model.from_dict(data)
-            collection.append(m)
+        if isinstance(response, dict):
+            size = response.get('size')
+            collection = response.get('collection', [])
 
-        return collection
+        parsed_collection = []
+
+        for d in collection:
+            m = model.from_dict(d)
+            parsed_collection.append(m)
+
+        return cls(size, parsed_collection)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return self.next()
+
+    def next(self):
+        try:
+            self._current = self.collection[self._index]
+            self._index += 1
+        except IndexError:
+            raise StopIteration
+
+        return self._current
+
+    def __repr__(self):
+        return "<%s [%s]> %s" % (self.__class__.__name__, self.size, self.collection)
+
+    def __eq__(self, other):
+        return other and self.__dict__ == other.__dict__
 
 
 class ResultCollection(object):

@@ -46,6 +46,10 @@ def create_short_url_link():
         description="test1")
 
 
+def create_collection(data):
+    return ModelCollection(len(data), data)
+
+
 class ShortUrlApiTest(SmsApiTestCase):
 
     def test_get_clicks(self):
@@ -53,7 +57,7 @@ class ShortUrlApiTest(SmsApiTestCase):
 
         r = self.client.shorturl.get_clicks(**args)
 
-        expected_result = ModelCollection([create_short_url_click()])
+        expected_result = create_collection([create_short_url_click()])
         expected_args = dict_replace(args, 'links', {'links[]': ['1', '2']})
 
         self.assertEqual(expected_result, r)
@@ -64,7 +68,7 @@ class ShortUrlApiTest(SmsApiTestCase):
 
         r = self.client.shorturl.get_clicks_by_mobile_device(**args)
 
-        expected_result = ModelCollection([create_short_url_click_by_mobile_device()])
+        expected_result = create_collection([create_short_url_click_by_mobile_device()])
 
         self.assertEqual(expected_result, r)
         self.assertEqual(dict_replace(args, 'links', {'links[]': ['1']}), self.request_fake.params)
@@ -72,7 +76,7 @@ class ShortUrlApiTest(SmsApiTestCase):
     def test_list_short_urls(self):
         r = self.client.shorturl.list_short_urls()
 
-        expected_result = ModelCollection([create_short_url_link()])
+        expected_result = create_collection([create_short_url_link()])
 
         self.assertEqual(expected_result, r)
 
@@ -129,6 +133,7 @@ class ShortUrlApiTest(SmsApiTestCase):
 
         self.assertEqual('DELETE', self.request_fake.http_method)
         self.assertTrue(self.request_fake.url.endswith('short_url/links/%s' % id))
+
 
 def suite():
     suite = unittest.TestSuite()

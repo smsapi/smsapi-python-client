@@ -4,6 +4,7 @@ import unittest
 from datetime import datetime, date
 from smsapi.contacts.models import ContactModel, GroupModel, GroupPermissionModel, ModelCollection, CustomFieldModel
 from tests import SmsApiTestCase
+from tests.contacts.fixtures import create_collection_from_fixture
 
 
 class ContactsApiTest(SmsApiTestCase):
@@ -26,11 +27,9 @@ class ContactsApiTest(SmsApiTestCase):
     def test_list_contacts(self):
         contacts = self.client.contacts.list_contacts()
 
-        self.assertIsInstance(contacts, list)
-        self.assertEqual(len(contacts), 2)
+        expected_contacts = create_collection_from_fixture('list_contacts', ContactModel)
 
-        for c in contacts:
-            self.assertIsInstance(c, ContactModel)
+        self.assertEqual(contacts, expected_contacts)
 
     def test_get_contact(self):
         self.client.contacts.get_contact(contact_id=1)
@@ -60,7 +59,7 @@ class ContactsApiTest(SmsApiTestCase):
         group = self.client.contacts.get_group(group_id=1)
 
         self.assertIsInstance(group, GroupModel)
-        self.assertIsInstance(group.permissions, list)
+        self.assertIsInstance(group.permissions, ModelCollection)
 
         for p in group.permissions:
             self.assertIsInstance(p, GroupPermissionModel)
@@ -98,10 +97,9 @@ class ContactsApiTest(SmsApiTestCase):
     def test_list_custom_fields(self):
         r = self.client.contacts.list_custom_fields()
 
-        fixture = self.load_fixture('contacts', 'list_custom_fields')['response']['collection'][0]
+        expected_collection = create_collection_from_fixture('list_custom_fields', CustomFieldModel)
 
-        self.assertIsInstance(r, ModelCollection)
-        self.assertEqual(r[0], CustomFieldModel.from_dict(fixture))
+        self.assertEqual(expected_collection, r)
 
     def test_create_custom_field(self):
         self.client.contacts.create_custom_field()
