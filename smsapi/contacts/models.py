@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from smsapi.models import Model, ModelCollection
+from smsapi.models import Model
 from smsapi.utils import convert_iso8601_str_to_datetime, convert_date_str_to_date
 
 
@@ -53,7 +53,7 @@ class GroupModel(Model):
         model = super(GroupModel, cls).from_dict(data)
 
         permissions = data.get('permissions', [])
-        model.permissions = ModelCollection.parse(permissions, GroupPermissionModel)
+        model.permissions = [GroupPermissionModel.from_dict(p) for p in permissions]
 
         return model
 

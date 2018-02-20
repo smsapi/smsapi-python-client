@@ -36,21 +36,12 @@ class ModelCollection(object):
 
     @classmethod
     def parse(cls, response, model):
+        size = response.get('size')
+        collection = response.get('collection', [])
 
-        size = None
-        collection = response
+        c = [model.from_dict(d) for d in collection]
 
-        if isinstance(response, dict):
-            size = response.get('size')
-            collection = response.get('collection', [])
-
-        parsed_collection = []
-
-        for d in collection:
-            m = model.from_dict(d)
-            parsed_collection.append(m)
-
-        return cls(size, parsed_collection)
+        return cls(size, c)
 
     def __iter__(self):
         return self

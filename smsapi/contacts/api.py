@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from smsapi.contacts.exceptions import ContactsException
-from smsapi.contacts.models import ContactModel, GroupModel, GroupPermissionModel, CustomFieldModel, ModelCollection
+from smsapi.models import ModelCollection
+from smsapi.contacts.models import ContactModel, GroupModel, GroupPermissionModel, CustomFieldModel
 
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint

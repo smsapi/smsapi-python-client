@@ -2,7 +2,7 @@
 
 import unittest
 from datetime import datetime, date
-from smsapi.contacts.models import ContactModel, GroupModel, GroupPermissionModel, ModelCollection, CustomFieldModel
+from smsapi.contacts.models import ContactModel, CustomFieldModel
 from tests import SmsApiTestCase
 from tests.contacts.fixtures import create_collection_from_fixture
 
@@ -56,13 +56,7 @@ class ContactsApiTest(SmsApiTestCase):
         self.client.contacts.delete_group(group_id=1)
 
     def test_get_group(self):
-        group = self.client.contacts.get_group(group_id=1)
-
-        self.assertIsInstance(group, GroupModel)
-        self.assertIsInstance(group.permissions, ModelCollection)
-
-        for p in group.permissions:
-            self.assertIsInstance(p, GroupPermissionModel)
+        self.client.contacts.get_group(group_id=1)
 
         self.assertEqual(self.client.contacts.client.domain + 'contacts/groups/1', self.request_fake.url)
         self.assertEqual({'with': 'contacts_count'}, self.request_fake.params)
