@@ -32,3 +32,7 @@ def remove_scheduled_sms():
 
 def send_parametrized_sms_to_many_numbers():
     client.sms.send(to=['number1', 'number2'], message='some text [%1%]', param1=['1', '2'])
+
+
+def send_sms_with_custom_sender_name():
+    client.sms.send(to='some-number', message='some text message', from_='your-custom-sender-name')
