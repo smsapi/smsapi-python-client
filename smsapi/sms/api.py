@@ -9,7 +9,7 @@ from smsapi.utils import join_params
 
 sms_parameters = [
     'message',
-    'from',
+    'from_',
     'encoding',
     'details',
     'template',
@@ -44,6 +44,9 @@ def parameters_transformer(_, parameters):
 
     join_params(parameters, ['to', 'id'])
     join_params(parameters, ['param1', 'param2', 'param3', 'param4', 'idx'], '|')
+
+    if 'from_' in parameters:
+        parameters['from'] = parameters.pop('from_')
 
     return parameters
 
