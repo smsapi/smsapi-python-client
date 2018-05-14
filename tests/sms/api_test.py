@@ -127,6 +127,14 @@ class SmsApiTest(SmsApiTestCase):
         self.assertSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args)
 
+    def test_send_test_sms(self):
+        number = '48100200300'
+        args = {'to': number, 'test': '1'}
+
+        self.client.sms.send(**args)
+
+        self.assertParamsForwardedToRequestEquals(args)
+
 
 def create_sms_exception_for_number(number):
     e = SendException(u'No correct phone numbers', 13)

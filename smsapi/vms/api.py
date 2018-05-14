@@ -20,7 +20,8 @@ accept_parameters = [
     'skip_gms',
     'idx',
     'check_idx',
-    'notify_url'
+    'notify_url',
+    'test'
 ]
 
 

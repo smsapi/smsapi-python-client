@@ -45,7 +45,7 @@ class MmsApiTest(SmsApiTestCase):
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_mms')
-    def test_remove_not_exists_sms(self):
+    def test_remove_not_exists_mms(self):
         exception = None
 
         try:
@@ -56,6 +56,14 @@ class MmsApiTest(SmsApiTestCase):
         expected_exception = EndpointException(u'Not exists ID message', 301)
 
         self.assertEqual(expected_exception, exception)
+
+    def test_send_test_mms(self):
+        number = '48100200300'
+        args = {'to': number, 'test': '1'}
+
+        self.client.mms.send(**args)
+
+        self.assertParamsForwardedToRequestEquals(args)
 
 
 def suite():

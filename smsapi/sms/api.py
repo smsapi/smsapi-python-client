@@ -31,6 +31,7 @@ sms_parameters = [
     'param2',
     'param3',
     'param4',
+    'test'
 ]
 
 fast_force_params = {'fast': 1}

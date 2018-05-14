@@ -68,7 +68,7 @@ class VmsApiTest(SmsApiTestCase):
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_vms')
-    def test_remove_not_exists_sms(self):
+    def test_remove_not_exists_vms(self):
         exception = None
 
         try:
@@ -79,6 +79,14 @@ class VmsApiTest(SmsApiTestCase):
         expected_exception = EndpointException(u'Not exists ID message', 301)
 
         self.assertEqual(expected_exception, exception)
+
+    def test_send_test_vms(self):
+        number = '48100200300'
+        args = {'to': number, 'test': '1'}
+
+        self.client.vms.send(**args)
+
+        self.assertParamsForwardedToRequestEquals(args)
 
 
 def suite():

@@ -15,6 +15,7 @@ accept_parameters = [
     'idx',
     'check_idx',
     'notify_url',
+    'test'
 ]
 
 
