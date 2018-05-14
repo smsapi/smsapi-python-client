@@ -4,9 +4,9 @@ from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException
 from smsapi.models import ResultCollection
-from smsapi.sender.models import SenderNameResult, SenderNameRemoveResult, SenderNameSetAsDefaultResult
 from smsapi.sms import response_format_param
 from smsapi.utils import update_dict
+from smsapi.sender.models import SenderNameResult, SenderNameSuccessResult
 
 
 def parameters_transformer(mapped_param):
@@ -23,7 +23,7 @@ class Sender(Api):
     add = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=SenderNameResult,
+        mapping=SenderNameSuccessResult,
         accept_parameters=['name'],
         force_parameters=response_format_param,
         exception_class=EndpointException,
@@ -43,7 +43,7 @@ class Sender(Api):
     remove = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=SenderNameRemoveResult,
+        mapping=SenderNameSuccessResult,
         accept_parameters=['name'],
         force_parameters=response_format_param,
         exception_class=EndpointException,
@@ -61,7 +61,7 @@ class Sender(Api):
     default = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=SenderNameSetAsDefaultResult,
+        mapping=SenderNameSuccessResult,
         accept_parameters=['name'],
         force_parameters=response_format_param,
         exception_class=EndpointException,

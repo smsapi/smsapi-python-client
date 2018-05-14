@@ -3,39 +3,40 @@
 import unittest
 
 from smsapi.models import ResultCollection
-from smsapi.sender.models import SenderNameResult, SenderNameRemoveResult, SenderNameSetAsDefaultResult
+from smsapi.sender.models import SenderNameResult, SenderNameSuccessResult
 from tests import SmsApiTestCase
 from tests.doubles import api_response_fixture
 
 
 class SenderApiTest(SmsApiTestCase):
 
-    @api_response_fixture('sender_name')
+    @api_response_fixture('success_response')
     def test_add_sender_name(self):
         name = 'any'
         result = self.client.sender.add(name=name)
 
-        expected_result = create_sender_name_result(name)
+        expected_result = SenderNameSuccessResult(1)
 
         self.assertEqual(expected_result, result)
         self.assertParamsForwardedToRequestEquals({'add': name})
 
-    @api_response_fixture('sender_name')
+    @api_response_fixture('check_sender_name')
     def test_check_sender_name(self):
         name = 'any'
         result = self.client.sender.check(name=name)
 
-        expected_result = SenderNameResult(name=name, status='ACTIVE', default=False)
+        expected_result = create_sender_name_result(name)
 
         self.assertEqual(expected_result, result)
         self.assertParamsForwardedToRequestEquals({'status': name})
 
+    @api_response_fixture('success_response')
     def test_remove_sender_name(self):
         name = 'any'
 
         result = self.client.sender.remove(name=name)
 
-        expected_result = SenderNameRemoveResult(count=1)
+        expected_result = SenderNameSuccessResult(1)
 
         self.assertEqual(expected_result, result)
         self.assertParamsForwardedToRequestEquals({'delete': name})
@@ -51,20 +52,20 @@ class SenderApiTest(SmsApiTestCase):
         self.assertEqual(expected_result, result)
         self.assertParamsForwardedToRequestEquals({'list': True})
 
-    @api_response_fixture('set_as_default')
+    @api_response_fixture('success_response')
     def test_set_default_sender_name(self):
         name = 'any'
 
         result = self.client.sender.default(name=name)
 
-        expected_result = SenderNameSetAsDefaultResult(count=1)
+        expected_result = SenderNameSuccessResult(1)
 
         self.assertEqual(expected_result, result)
         self.assertParamsForwardedToRequestEquals({'default': name})
 
 
 def create_sender_name_result(name):
-    return SenderNameResult(name=name, status='ACTIVE', default=False)
+    return SenderNameResult(name, 'ACTIVE', False)
 
 
 def suite():

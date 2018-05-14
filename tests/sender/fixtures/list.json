@@ -2,12 +2,12 @@
     "status_code": 201,
     "response": [
       {
-        "name": "any",
+        "sender": "any",
         "status": "ACTIVE",
         "default": false
       },
       {
-        "name": "some",
+        "sender": "some",
         "status": "ACTIVE",
         "default": false
       }
