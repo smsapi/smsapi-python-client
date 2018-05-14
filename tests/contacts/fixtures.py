@@ -11,6 +11,6 @@ def create_collection_from_fixture(fixture, model):
 
     r = json.load(list_contacts).get('response')
 
-    c = ModelCollection(r['size'], map(lambda x: model(**x), r['collection']))
+    c = ModelCollection(r['size'], list(map(lambda x: model(**x), r['collection'])))
 
     return c
