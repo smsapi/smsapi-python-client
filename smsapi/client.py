@@ -35,6 +35,8 @@ class Client(object):
         self.contacts = Contacts(self)
         self.sender = Sender(self)
         self.shorturl = ShortUrl(self)
+        self.hlr = Hlr(self)
+        self.push = Push(self)
 
 
 class SmsApiPlClient(Client):
@@ -44,8 +46,6 @@ class SmsApiPlClient(Client):
 
         self.mms = Mms(self)
         self.vms = Vms(self)
-        self.hlr = Hlr(self)
-        self.push = Push(self)
 
 
 class SmsApiComClient(Client):
