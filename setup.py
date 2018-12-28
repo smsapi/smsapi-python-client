@@ -12,7 +12,7 @@ setup(
     author='SMSAPI',
     author_email='bok@smsapi.pl',
     url='https://github.com/smsapi/smsapi-python-client',
-    packages=find_packages(include=["smsapi", "smsapi.*"]),
+    packages=find_packages(),
     license=open('LICENSE').read(),
     install_requires=[
         'requests',
