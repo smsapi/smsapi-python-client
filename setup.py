@@ -14,6 +14,7 @@ setup(
     url='https://github.com/smsapi/smsapi-python-client',
     packages=find_packages(exclude=["tests.*",  "tests"]),
     license=open('LICENSE').read(),
+    include_package_data=True,
     install_requires=[
         'requests',
     ],
