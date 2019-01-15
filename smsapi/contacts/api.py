@@ -63,13 +63,6 @@ class Contacts(Api):
         accept_parameters=['contact_id', 'group_id']
     )
 
-    bind_contact_to_group = bind_api_endpoint(
-        method='POST',
-        path='contacts/{contact_id}/groups/{group_id}',
-        exception_class=ContactsException,
-        accept_parameters=['contact_id', 'group_id']
-    )
-
     list_groups = bind_api_endpoint(
         method='GET',
         path='contacts/groups',

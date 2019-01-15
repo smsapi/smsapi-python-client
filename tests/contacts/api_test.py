@@ -40,9 +40,6 @@ class ContactsApiTest(SmsApiTestCase):
     def test_list_contacts_groups(self):
         self.client.contacts.list_contact_groups(contact_id=1)
 
-    def test_bind_contact_to_group(self):
-        self.client.contacts.bind_contact_to_group(contact_id=1, group_id=1)
-
     def test_list_groups(self):
         self.client.contacts.list_groups()
 

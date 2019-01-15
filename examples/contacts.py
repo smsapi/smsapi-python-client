@@ -62,10 +62,6 @@ def get_contact_groups():
         print(g.id)
 
 
-def add_contact_to_group():
-    client.contacts.bind_contact_to_group(contact_id=1, group_id=1)
-
-
 def remove_contact():
     client.contacts.delete_contact(contact_id=1)
 
