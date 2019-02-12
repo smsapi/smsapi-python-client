@@ -29,7 +29,6 @@ def bind_api_endpoint(**config):
         exception_class = config.get('exception_class')
 
         def __init__(self, api, parameters):
-
             super(ApiEndpoint, self).__init__()
 
             self.api = api
@@ -37,6 +36,7 @@ def bind_api_endpoint(**config):
             self.files = None
 
             self.parameters = parameters
+            self.compiled_parameters = {}
 
             self.filter_parameters()
             self.compile_path()
@@ -57,7 +57,7 @@ def bind_api_endpoint(**config):
 
             compiled_parameters = filter_dict(compiled_parameters)
 
-            self.parameters = compiled_parameters
+            self.compiled_parameters = compiled_parameters
 
         def compile_path(self):
 
@@ -66,8 +66,8 @@ def bind_api_endpoint(**config):
             for placeholder in placeholder_pattern.findall(self.path):
                 name = placeholder.strip('{}')
 
-                if name in self.parameters:
-                    param = quote(self.parameters.pop(name))
+                if name in self.compiled_parameters:
+                    param = quote(self.compiled_parameters.pop(name))
                     self.path = self.path.replace(placeholder, param)
                 else:
                     raise EndpointException("No parameter found for path variable '%s'" % name)
@@ -84,12 +84,14 @@ def bind_api_endpoint(**config):
             kwargs = {
                 'auth': self.api.client.auth,
                 'headers': headers,
-                'files': self.files}
+                'files': self.files,
+                'timeout': self.parameters.get('timeout', 10)
+            }
 
             if self.method is 'GET':
-                kwargs.update({'params': self.parameters})
+                kwargs.update({'params': self.compiled_parameters})
             else:
-                kwargs.update({'data': self.parameters})
+                kwargs.update({'data': self.compiled_parameters})
 
             raw_response = requests.request(self.method, url, **kwargs)
 

@@ -1,9 +1,13 @@
-.PHONY: dist
+.PHONY: dist tests
 
 PYTHON := python3
 
 PROJECT := smsapi-client
 EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
+
+
+tests:
+	$(PYTHON) runtests.py
 
 
 clean:
