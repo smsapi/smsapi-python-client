@@ -49,9 +49,10 @@ else You need to use client for smsapi.com
     
     client = SmsApiPlClient(access_token='your access token')
     
-    r = client.sms.send(to='phone number', message='text message')
-    
-    print(r.id, r.points, r.status, r.error)
+    send_results = client.sms.send(to='phone number', message='text message')
+
+    for result in send_results:
+        print(result.id, result.points, result.error)
 ```
 
 - **You can find more examples in "examples" directory in project files.**
