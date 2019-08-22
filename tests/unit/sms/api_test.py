@@ -6,7 +6,7 @@ from smsapi.exception import EndpointException, SendException
 from smsapi.models import ResultCollection, RemoveMessageResult, InvalidNumber
 from smsapi.sms.api import flash_force_params, fast_force_params
 from tests import SmsApiTestCase
-from tests.doubles import api_response_fixture
+from tests.unit.doubles import api_response_fixture
 
 
 class SmsApiTest(SmsApiTestCase):

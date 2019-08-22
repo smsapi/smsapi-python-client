@@ -5,7 +5,7 @@ import unittest
 from smsapi.models import ResultCollection
 from smsapi.sender.models import SenderNameResult, SenderNameSuccessResult
 from tests import SmsApiTestCase
-from tests.doubles import api_response_fixture
+from tests.unit.doubles import api_response_fixture
 
 
 class SenderApiTest(SmsApiTestCase):

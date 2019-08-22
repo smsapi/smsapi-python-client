@@ -5,7 +5,7 @@ import unittest
 from smsapi.exception import EndpointException
 from smsapi.models import ResultCollection, RemoveMessageResult
 from tests import SmsApiTestCase, create_send_result
-from tests.doubles import api_response_fixture
+from tests.unit.doubles import api_response_fixture
 
 
 class VmsApiTest(SmsApiTestCase):

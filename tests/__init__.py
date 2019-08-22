@@ -11,8 +11,8 @@ from smsapi.client import SmsApiPlClient
 from smsapi.models import ResultCollection
 from smsapi.sms import response_format_param
 
-from tests.doubles import ApiSpy, request_fake
-from tests.fixtures import create_send_result
+from tests.unit.doubles import ApiSpy, request_fake
+from tests.unit.fixtures import create_send_result
 
 requests.request = request_fake
 

@@ -11,10 +11,12 @@ tests:
 
 
 clean:
-	find . -name '*.pyc' -delete
-	find . -name '__pycache__' -delete
+	rm -rf venv
 	rm -rf dist build
 	rm -rf $(EGG_INFO)
+
+	find . -name '*.pyc' -delete
+	find . -name '__pycache__' -delete
 
 
 dist: clean
@@ -22,5 +24,5 @@ dist: clean
 	$(PYTHON) setup.py bdist_wheel
 
 
-upload:
+release: dist
 	twine upload dist/*

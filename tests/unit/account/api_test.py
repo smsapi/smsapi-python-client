@@ -5,7 +5,7 @@ from smsapi.account.models import AccountBalanceResult, UserResult
 from smsapi.models import ResultCollection
 
 from tests import SmsApiTestCase
-from tests.doubles import api_response_fixture
+from tests.unit.doubles import api_response_fixture
 
 
 class AccountApiTest(SmsApiTestCase):

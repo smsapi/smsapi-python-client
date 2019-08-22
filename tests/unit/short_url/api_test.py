@@ -7,7 +7,7 @@ from smsapi.models import ModelCollection
 from smsapi.short_url.models import ShortUrlClick, ShortUrlClickMessage, ShortUrlClickByMobileDevice, ShortUrl
 from smsapi.utils import dict_replace
 from tests import SmsApiTestCase
-from tests.doubles import api_response_fixture
+from tests.unit.doubles import api_response_fixture
 
 
 def create_short_url_click():

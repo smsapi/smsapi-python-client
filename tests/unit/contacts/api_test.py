@@ -4,7 +4,7 @@ import unittest
 from datetime import datetime, date
 from smsapi.contacts.models import ContactModel, CustomFieldModel
 from tests import SmsApiTestCase
-from tests.contacts.fixtures import create_collection_from_fixture
+from tests.unit.contacts.fixtures import create_collection_from_fixture
 
 
 class ContactsApiTest(SmsApiTestCase):
