@@ -6,6 +6,14 @@ PROJECT := smsapi-client
 EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
 
 
+venv:
+	virtualenv --python=python3 venv
+
+
+install: venv
+	. venv/bin/activate; pip install .
+
+
 tests:
 	$(PYTHON) runtests.py
 
