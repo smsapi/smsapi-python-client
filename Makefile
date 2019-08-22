@@ -1,7 +1,5 @@
 .PHONY: dist tests
 
-PYTHON := python3
-
 PROJECT := smsapi-client
 EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
 
@@ -15,7 +13,7 @@ install: venv
 
 
 tests:
-	$(PYTHON) runtests.py
+	. venv/bin/activate; python runtests.py
 
 
 clean:
@@ -28,8 +26,8 @@ clean:
 
 
 dist: clean
-	$(PYTHON) setup.py sdist
-	$(PYTHON) setup.py bdist_wheel
+	. venv/bin/activate; setup.py sdist
+	. venv/bin/activate; setup.py bdist_wheel
 
 
 release: dist
