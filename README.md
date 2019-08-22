@@ -1,6 +1,9 @@
 ﻿smsapi-python
 =============
 
+[![Build Status](https://travis-ci.org/smsapi/smsapi-python-client.svg?branch=master)](https://travis-ci.org/smsapi/smsapi-python-client)
+[![PyPI](https://img.shields.io/pypi/v/smsapi-client.svg)](https://pypi.python.org/pypi/smsapi-client)
+
 Client for SMSAPI.
 
 ## COMPATIBILITY:
