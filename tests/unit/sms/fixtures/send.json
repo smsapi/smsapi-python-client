@@ -9,7 +9,8 @@
           "number": "48100200300",
           "date_sent": 1460969712,
           "submitted_number": "48100200300",
-          "status": "QUEUE"
+          "status": "QUEUE",
+          "parts": 1
         }
       ]
     }
