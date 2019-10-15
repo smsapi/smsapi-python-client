@@ -5,12 +5,7 @@ class Model(object):
 
     @classmethod
     def from_dict(cls, data, **kwargs):
-        args = {}
-
-        for k,v in data.items():
-            args[str(k)] = v
-
-        return cls(**args)
+        return cls(**data)
 
     def __repr__(self):
         return "<%s %s>" % (self.__class__.__name__, self.__dict__)
@@ -116,20 +111,19 @@ class ResultCollection(object):
 
 class SendResult(Model):
 
-    def __init__(self, id=None, points=None, number=None,
-                 date_sent=None, submitted_number=None,
-                 status=None, idx=None, error=None):
+    def __init__(self, **kwargs):
 
         super(SendResult, self).__init__()
 
-        self.id = id
-        self.points = points
-        self.number = number
-        self.date_sent = date_sent
-        self.submitted_number = submitted_number
-        self.status = status
-        self.idx = idx
-        self.error = error
+        self.id = kwargs.get("id")
+        self.points = kwargs.get("points")
+        self.number = kwargs.get("number")
+        self.date_sent = kwargs.get("date_sent")
+        self.submitted_number = kwargs.get("submitted_number")
+        self.status = kwargs.get("status")
+        self.idx = kwargs.get("idx")
+        self.error = kwargs.get("error")
+        self.parts = kwargs.get("parts")
 
 
 class RemoveMessageResult(Model):
