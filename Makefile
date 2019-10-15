@@ -16,8 +16,11 @@ tests:
 	. venv/bin/activate; python runtests.py
 
 
-clean:
+clean-venv:
 	rm -rf venv
+
+
+clean:
 	rm -rf dist build
 	rm -rf $(EGG_INFO)
 
@@ -26,8 +29,8 @@ clean:
 
 
 dist: clean
-	. venv/bin/activate; setup.py sdist
-	. venv/bin/activate; setup.py bdist_wheel
+	. venv/bin/activate; python setup.py sdist
+	. venv/bin/activate; python setup.py bdist_wheel
 
 
 release: dist
