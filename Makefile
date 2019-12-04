@@ -5,7 +5,8 @@ EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
 
 
 venv:
-	virtualenv --python=python3 venv
+	@python --version || (echo "Python is not installed."; exit 1)
+	virtualenv --python=python venv
 
 
 install: venv
@@ -28,10 +29,13 @@ clean:
 	find . -name '__pycache__' -delete
 
 
+clean-all: clean clean-venv
+
+
 dist: clean
 	. venv/bin/activate; python setup.py sdist
 	. venv/bin/activate; python setup.py bdist_wheel
 
 
 release: dist
-	twine upload dist/*
+	python -m twine upload dist/*
