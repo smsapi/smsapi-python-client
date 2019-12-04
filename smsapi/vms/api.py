@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import os
+
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
@@ -15,7 +14,7 @@ accept_parameters = [
     'tts_lector',
     'date',
     'date_validate',
-    'try',
+    'try_',
     'interval',
     'skip_gms',
     'idx',
@@ -27,6 +26,9 @@ accept_parameters = [
 
 def parameters_transformer(api_endpoint, parameters):
     join_params(parameters, ['idx'], '|')
+
+    if 'try_' in parameters:
+        parameters['try'] = parameters.pop('try_')
 
     if 'file' in parameters and os.path.isfile(parameters.get('file')):
         api_endpoint.add_file(open(parameters.pop('file'), 'rb'))

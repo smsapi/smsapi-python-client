@@ -88,6 +88,11 @@ class VmsApiTest(SmsApiTestCase):
 
         self.assertParamsForwardedToRequestEquals(args)
 
+    def test_send_test_vms_with_try_parameter(self):
+        self.client.vms.send(try_=3)
+
+        self.assertParamsForwardedToRequestEquals({'try': '3'})
+
 
 def suite():
     suite = unittest.TestSuite()
