@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
+import re
 from datetime import datetime, timedelta, tzinfo
 
 date_format = "%Y-%m-%d"
@@ -34,16 +32,28 @@ def convert_to_utf8_str(data):
 
 
 def convert_iso8601_str_to_datetime(iso8601_str):
-    date_str, utc_time_str = iso8601_str.split('T')
-    time_str, utc_offset = utc_time_str[:8], utc_time_str[-6:]
+    utc_offset = '00:00'
+    utc_offset_sign = '+'
+    utc_offset_hours = '0'
+    utc_offset_minutes = '0'
+
+    date_str, time_str = iso8601_str.split('T')
+
+    time_str_s = re.split(r"([Z+|-])", time_str)
+    time_str = time_str_s[0]
+
+    if len(time_str_s) == 3 and all(p for p in time_str_s):
+        utc_offset_sign = time_str_s[1]
+        utc_offset = time_str_s[2]
+
+    if utc_offset:
+        utc_offset = utc_offset.replace(':', '')
+        utc_offset_hours, utc_offset_minutes = utc_offset[:2], utc_offset[2:]
 
     date = date_str.split('-')
     time = time_str.split(':')
-    utc_offset = utc_offset.replace(':', '')[1:]
 
-    utc_offset_hours, utc_offset_minutes = utc_offset[:2], utc_offset[2:]
-
-    fixed_offset = FixedOffset(int(utc_offset_hours), int(utc_offset_minutes))
+    fixed_offset = FixedOffset(int(utc_offset_sign + utc_offset_hours), int(utc_offset_sign + utc_offset_minutes))
 
     return datetime(int(date[0]), int(date[1]), int(date[2]),
                     int(time[0]), int(time[1]), int(time[2]),

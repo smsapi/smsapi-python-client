@@ -4,6 +4,7 @@ from requests.auth import HTTPBasicAuth
 
 from smsapi.account.api import Account
 from smsapi.auth import BearerAuth
+from smsapi.blacklist.api import Blacklist
 from smsapi.contacts.api import Contacts
 from smsapi.exception import ClientException
 from smsapi.hrl.api import Hlr
@@ -37,6 +38,7 @@ class Client(object):
         self.shorturl = ShortUrl(self)
         self.hlr = Hlr(self)
         self.push = Push(self)
+        self.blacklist = Blacklist(self)
 
 
 class SmsApiPlClient(Client):

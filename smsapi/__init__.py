@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
 name = 'smsapi-client'
-version = '2.3.2'
+version = '2.4.0'
 
 lib_info = '%s/%s' % (name, version)
