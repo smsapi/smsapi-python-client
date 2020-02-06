@@ -38,7 +38,7 @@ from smsapi.client import SmsApiPlClient
 else You need to use client for smsapi.com
 
 ```python
-from smsapi.client import SmsApiPlClient
+from smsapi.client import SmsApiComClient
 ```
 
 ## Credentials
