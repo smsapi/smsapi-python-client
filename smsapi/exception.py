@@ -21,6 +21,9 @@ class SmsApiException(Exception):
     def __eq__(self, other):
         return other and self.__dict__ == other.__dict__
 
+    def __hash__(self):
+        return hash((self.message, self.code))
+
     def __repr__(self):
         return "<%s %s>" % (self.__class__.__name__, self.__dict__)
 
