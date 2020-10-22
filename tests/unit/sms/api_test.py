@@ -13,12 +13,15 @@ class SmsApiTest(SmsApiTestCase):
 
     def test_send_sms(self):
         number = '48100200300'
-        args = {'to': number}
+        kwargs = {
+            'to': number,
+            'from': 'test'
+        }
 
-        result = self.client.sms.send(**args)
+        result = self.client.sms.send(**kwargs)
 
         self.assertSendResultForNumberEquals(number, result)
-        self.assertParamsForwardedToRequestEquals(args)
+        self.assertParamsForwardedToRequestEquals(kwargs)
 
     @api_response_fixture('send')
     def test_send_sms_with_custom_sender(self):
