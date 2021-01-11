@@ -4,6 +4,7 @@
     "id": "1",
     "name": "test1",
     "url": "http://invoid.pl",
+    "domain": null,
     "short_url": "http://idz.do/test1",
     "filename": null,
     "type": "URL",

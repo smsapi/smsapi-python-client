@@ -59,7 +59,8 @@ class ShortUrlClickMessage(Model):
 class ShortUrl(Model):
 
     def __init__(self, id=None, name=None, url=None, short_url=None, filename=None,
-                 type=None, expire=None, hits=None, hits_unique=None, description=None):
+                 type=None, expire=None, hits=None, hits_unique=None, description=None,
+                 domain=None):
 
         super(ShortUrl, self).__init__()
 
@@ -73,3 +74,4 @@ class ShortUrl(Model):
         self.hits = hits
         self.hits_unique = hits_unique
         self.description = description
+        self.domain = domain
