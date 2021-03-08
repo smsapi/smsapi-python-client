@@ -6,7 +6,7 @@ from smsapi.models import InvalidNumber
 class SmsApiException(Exception):
 
     def __init__(self, message, code=None, *args):
-        super(SmsApiException, self).__init__(*args)
+        super(SmsApiException, self).__init__(message, code, *args)
 
         self.message = message
         self.code = code
