@@ -1,12 +1,14 @@
 .PHONY: dist tests
 
+PYTHON = python
+
 PROJECT := smsapi-client
 EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
 
 
 venv:
-	@python --version || (echo "Python is not installed."; exit 1)
-	virtualenv --python=python venv
+	@${PYTHON} --version || (echo "Python is not installed."; exit 1)
+	virtualenv --python=${PYTHON} venv
 
 
 install: venv
