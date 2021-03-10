@@ -12,18 +12,25 @@ from smsapi.exception import (
 class ExceptionPicklingTest(unittest.TestCase):
     """Ensure SMS API custom exceptions are pickleable."""
 
-    def test_exception_pickling(self):
-        """Ensure SMS API exceptions are pickleable."""
-        message = 'test exception pickling'
-        exceptions = [
-            ClientException(message),
-            EndpointException(message),
-            SendException(message, code='pickiling_error'),
-            SmsApiException(message),
-        ]
-        for exception in exceptions:
-            with self.subTest(exception=exception):
-                self.assert_is_pickleable(exception)
+    message = 'test exception pickling'
+
+    def test_client_exception_pickling(self):
+        """Ensure ``ClientException`` is pickleable."""
+        self.assert_is_pickleable(ClientException(self.message))
+
+    def test_endpoint_exception_pickling(self):
+        """Ensure ``EndpointException`` is pickleable."""
+        self.assert_is_pickleable(EndpointException(self.message))
+
+    def test_send_exception_pickling(self):
+        """Ensure ``SendException`` is pickleable."""
+        self.assert_is_pickleable(
+            SendException(self.message, code='pickling_error'),
+        )
+
+    def test_smsapi_exception_pickling(self):
+        """Ensure ``SmsApiException`` is pickleable."""
+        self.assert_is_pickleable(SmsApiException(self.message))
 
     def assert_is_pickleable(self, exception):
         """Assert exception is pickleable."""
