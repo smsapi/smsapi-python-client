@@ -1,5 +1,9 @@
 # Changes
 
+## 2.4.5
+
+- make exceptions pickleable
+
 ## 2.4.4
 
 - fix: accept 'domain' parameter from short_url API   
