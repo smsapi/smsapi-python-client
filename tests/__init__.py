@@ -10,6 +10,7 @@ from smsapi.api import Api
 from smsapi.client import SmsApiPlClient
 from smsapi.models import ResultCollection
 from smsapi.sms import response_format_param
+from smsapi.sms.model import SmsSendResult
 
 from tests.unit.doubles import ApiSpy, request_fake
 from tests.unit.fixtures import create_send_result
@@ -38,19 +39,21 @@ class SmsApiTestCase(unittest.TestCase):
 
         params.update(response_format_param)
 
-        if self.request_fake.http_method is 'GET':
-            data_sent = self.request_fake.params
-        else:
-            data_sent = self.request_fake.data
+        self.assertEqual(params, self.request_fake.payload)
 
-        self.assertEqual(params, data_sent)
+    def assertRequestPayloadContains(self, key, value):
+        self.assertIn(key, self.request_fake.payload.keys())
+        self.assertIn(value, self.request_fake.payload.values())
 
-    def assertSendResultForNumberEquals(self, number, result):
+    def assertSendResultForNumberEquals(self, number, result, result_class=ResultCollection):
         numbers = number if isinstance(number, list) else [number]
 
-        expected_result = ResultCollection(len(numbers), [create_send_result(n) for n in numbers])
+        expected_result = result_class(len(numbers), [create_send_result(n) for n in numbers])
 
         self.assertEqual(expected_result, result)
+
+    def assertSmsSendResultForNumberEquals(self, number, result):
+        self.assertSendResultForNumberEquals(number, result, result_class=SmsSendResult)
 
 
 def spy_endpoints(client):

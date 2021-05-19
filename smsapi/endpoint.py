@@ -88,7 +88,7 @@ def bind_api_endpoint(**config):
                 'timeout': self.parameters.get('timeout', 10)
             }
 
-            if self.method is 'GET':
+            if self.method == 'GET':
                 kwargs.update({'params': self.compiled_parameters})
             else:
                 kwargs.update({'data': self.compiled_parameters})

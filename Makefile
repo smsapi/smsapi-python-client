@@ -40,4 +40,4 @@ dist: clean
 
 
 release: dist
-	python -m twine upload dist/*
+	. venv/bin/activate; python -m twine upload dist/*

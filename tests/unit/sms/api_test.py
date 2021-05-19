@@ -20,7 +20,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send(**kwargs)
 
-        self.assertSendResultForNumberEquals(number, result)
+        self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(kwargs)
 
     @api_response_fixture('send')
@@ -30,7 +30,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send(to=number, from_=any_sender_name)
 
-        self.assertSendResultForNumberEquals(number, result)
+        self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals({'to': number, 'from': any_sender_name})
 
     @api_response_fixture('send_to_many_recipients')
@@ -39,7 +39,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send(to=[number_1, number_2])
 
-        self.assertSendResultForNumberEquals([number_1, number_2], result)
+        self.assertSmsSendResultForNumberEquals([number_1, number_2], result)
         self.assertParamsForwardedToRequestEquals({'to': '%s,%s' % (number_1, number_2)})
 
     @api_response_fixture('send_to_invalid_number')
@@ -63,7 +63,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send_fast(**args)
 
-        self.assertSendResultForNumberEquals(number, result)
+        self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args, fast_force_params)
 
     def test_send_flash(self):
@@ -72,7 +72,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send_flash(**args)
 
-        self.assertSendResultForNumberEquals(number, result)
+        self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args, flash_force_params)
 
     def test_remove_scheduled_sms(self):
@@ -127,7 +127,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send(**args)
 
-        self.assertSendResultForNumberEquals(number, result)
+        self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args)
 
     def test_send_test_sms(self):
@@ -137,6 +137,15 @@ class SmsApiTest(SmsApiTestCase):
         self.client.sms.send(**args)
 
         self.assertParamsForwardedToRequestEquals(args)
+
+    @api_response_fixture('detailed_response')
+    def test_send_sms_with_detailed_response(self):
+        result = self.client.sms.send(details=1)
+
+        self.assertEqual(4, result.length)
+        self.assertEqual(1, result.parts)
+        self.assertEqual("test", result.message)
+        self.assertRequestPayloadContains("details", "1")
 
 
 def create_sms_exception_for_number(number):

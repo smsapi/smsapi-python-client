@@ -5,6 +5,7 @@ from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
 from smsapi.models import ResultCollection, SendResult, RemoveMessageResult
 from smsapi.sms import response_format_param
+from smsapi.sms.model import SmsSendResult
 from smsapi.utils import join_params
 
 sms_parameters = [
@@ -60,7 +61,7 @@ class Sms(Api):
     send = bind_api_endpoint(
         method='POST',
         path=path,
-        mapping=(SendResult, ResultCollection),
+        mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['to'],
         force_parameters=response_format_param,
         exception_class=SendException,
@@ -70,7 +71,7 @@ class Sms(Api):
     send_fast = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=(SendResult, ResultCollection),
+        mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['to'],
         force_parameters=fast_force_params,
         exception_class=SendException,
@@ -80,7 +81,7 @@ class Sms(Api):
     send_flash = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=(SendResult, ResultCollection),
+        mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['to'],
         force_parameters=flash_force_params,
         exception_class=SendException,
@@ -90,7 +91,7 @@ class Sms(Api):
     send_to_group = bind_api_endpoint(
         method='GET',
         path=path,
-        mapping=(SendResult, ResultCollection),
+        mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['group'],
         force_parameters=response_format_param,
         exception_class=SendException,

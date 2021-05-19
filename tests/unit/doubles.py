@@ -41,6 +41,10 @@ class RequestFake(object):
 
         return ResponseMock(status_code, content, headers)
 
+    @property
+    def payload(self):
+        return self.params if self.http_method == 'GET' else self.data
+
 
 class ResponseMock(object):
 
