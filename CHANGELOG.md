@@ -1,5 +1,9 @@
 # Changes
 
+## 2.6.0
+- Support for smsapi.bg
+___
+
 ## 2.5.0
 - Add support for optional `details` param in SMS API, so it makes fields like (`message`, `parts`, `length`) accessible through response model. 
 ___

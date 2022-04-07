@@ -54,3 +54,9 @@ class SmsApiComClient(Client):
 
     def __init__(self, **kwargs):
         super(SmsApiComClient, self).__init__('https://api.smsapi.com/', **kwargs)
+
+
+class SmsApiBgClient(Client):
+
+    def __init__(self, **kwargs):
+        super(SmsApiBgClient, self).__init__('https://api.smsapi.bg/', **kwargs)
