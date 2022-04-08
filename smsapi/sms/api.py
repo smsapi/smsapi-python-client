@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
