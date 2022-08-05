@@ -3,7 +3,7 @@ from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
 from smsapi.models import ResultCollection, SendResult, RemoveMessageResult
 from smsapi.sms import response_format_param
-from smsapi.sms.model import SmsSendResult
+from smsapi.sms.model import SmsSendResult, SmsMFASendResult
 from smsapi.utils import join_params
 
 sms_parameters = [
@@ -34,6 +34,19 @@ sms_parameters = [
     'test'
 ]
 
+sms_mfa_parameters = [
+    'phone_number',
+    'from',
+    'from_',
+    'content',
+    'fast'
+]
+
+sms_mfa_verify_parameters = [
+    'phone_number',
+    'code'
+]
+
 fast_force_params = {'fast': 1}
 flash_force_params = {'flash': 1}
 
@@ -55,6 +68,8 @@ def parameters_transformer(_, parameters):
 class Sms(Api):
 
     path = 'sms.do'
+    path_mfa = 'mfa/codes'
+    path_mfa_verify = 'mfa/codes/verifications'
 
     send = bind_api_endpoint(
         method='POST',
@@ -63,6 +78,26 @@ class Sms(Api):
         accept_parameters=sms_parameters + ['to'],
         force_parameters=response_format_param,
         exception_class=SendException,
+        parameters_transformer=parameters_transformer
+    )
+
+    send_mfa = bind_api_endpoint(
+        method='POST',
+        path=path_mfa,
+        mapping=(SendResult, SmsMFASendResult),
+        accept_parameters=sms_mfa_parameters,
+        force_parameters=response_format_param,
+        exception_class=SendException,
+        parameters_transformer=parameters_transformer
+    )
+
+    verify_mfa = bind_api_endpoint(
+        method='POST',
+        path=path_mfa_verify,
+        mapping=(),
+        accept_parameters=sms_mfa_verify_parameters,
+        force_parameters=response_format_param,
+        exception_class=EndpointException,
         parameters_transformer=parameters_transformer
     )
 
