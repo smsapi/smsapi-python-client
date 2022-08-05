@@ -26,3 +26,26 @@ class SmsSendResult(ResultCollection):
             collection.append(m)
 
         return cls(count, collection, message=message, length=length, parts=parts)
+
+
+class SmsMFASendResult(ResultCollection):
+
+    def __init__(self, id, code, phone_number, from_):
+        super(SmsMFASendResult, self).__init__(1, [{'id': id, 'code': code, 'phone_number': phone_number, 'from': from_}])
+
+    @classmethod
+    def parse(cls, json_response, model):
+        id = json_response.get('id')
+        code = json_response.get('code')
+        phone_number = json_response.get('phone_number')
+        from_ = json_response.get('from')
+
+        sms_list = [json_response]
+
+        collection = []
+
+        for sms in sms_list:
+            m = model.from_dict(sms)
+            collection.append(m)
+
+        return cls(1, collection, id=id, code=code, phone_number=phone_number, from_=from_)
