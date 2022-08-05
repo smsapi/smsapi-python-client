@@ -3,7 +3,7 @@ from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
 from smsapi.models import ResultCollection, SendResult, RemoveMessageResult
 from smsapi.sms import response_format_param
-from smsapi.sms.model import SmsSendResult, SmsMFASendResult
+from smsapi.sms.model import SmsSendResult, SmsMFASendResult, SmsMFAVerifyResult
 from smsapi.utils import join_params
 
 sms_parameters = [
@@ -94,7 +94,7 @@ class Sms(Api):
     verify_mfa = bind_api_endpoint(
         method='POST',
         path=path_mfa_verify,
-        mapping=(),
+        mapping=(SendResult, SmsMFAVerifyResult),
         accept_parameters=sms_mfa_verify_parameters,
         force_parameters=response_format_param,
         exception_class=EndpointException,

@@ -52,3 +52,13 @@ class SmsMFASendResult(ResultCollection):
             collection.append(m)
 
         return cls(1, collection, code=code, phone_number=phone_number, from_=from_)
+
+
+class SmsMFAVerifyResult(ResultCollection):
+
+    def __init__(self, count, results):
+        super(SmsMFAVerifyResult, self).__init__(count, results)
+
+    @classmethod
+    def parse(cls, json_response, model):
+        return cls(0, [])
