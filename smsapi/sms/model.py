@@ -30,8 +30,13 @@ class SmsSendResult(ResultCollection):
 
 class SmsMFASendResult(ResultCollection):
 
-    def __init__(self, id, code, phone_number, from_):
-        super(SmsMFASendResult, self).__init__(1, [{'id': id, 'code': code, 'phone_number': phone_number, 'from': from_}])
+    def __init__(self, count, results, id, code, phone_number, from_):
+        super(SmsMFASendResult, self).__init__(count, results)
+
+        self.id = id
+        self.code = code
+        self.phone_number = phone_number
+        self.from_ = from_
 
     @classmethod
     def parse(cls, json_response, model):
