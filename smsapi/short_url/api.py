@@ -18,10 +18,14 @@ short_url_parameters = [
     'url',
     'file',
     'name',
-    'expire',
+    'expire_time',
+    'expire_unit',
     'description'
 ]
 
+short_url_deprecated_parameters = [
+    'expire'
+]
 
 def parameters_transformer(api_endpoint, parameters):
     if 'file' in parameters and os.path.isfile(parameters.get('file')):
@@ -67,7 +71,7 @@ class ShortUrl(Api):
         path='short_url/links',
         mapping=ShortUrlModel,
         exception_class=EndpointException,
-        accept_parameters=short_url_parameters,
+        accept_parameters=short_url_parameters + short_url_deprecated_parameters,
         parameters_transformer=parameters_transformer
     )
 
