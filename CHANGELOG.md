@@ -1,5 +1,10 @@
 # Changes
 
+## 2.7.0
+- support MFA API
+- increase requests timeout to 30 seconds
+---
+
 ## 2.6.0
 - Support for smsapi.bg
 ___
