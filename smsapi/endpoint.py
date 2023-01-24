@@ -85,7 +85,7 @@ def bind_api_endpoint(**config):
                 'auth': self.api.client.auth,
                 'headers': headers,
                 'files': self.files,
-                'timeout': self.parameters.get('timeout', 10)
+                'timeout': self.parameters.get('timeout', 30)
             }
 
             if self.method == 'GET':
