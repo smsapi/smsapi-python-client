@@ -1,5 +1,9 @@
 # Changes
 
+## 2.8.0
+- remove push API
+---
+
 ## 2.7.0
 - support MFA API
 - increase requests timeout to 30 seconds
