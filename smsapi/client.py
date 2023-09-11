@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from requests.auth import HTTPBasicAuth
 
 from smsapi.account.api import Account
@@ -9,7 +7,6 @@ from smsapi.contacts.api import Contacts
 from smsapi.exception import ClientException
 from smsapi.hrl.api import Hlr
 from smsapi.mms.api import Mms
-from smsapi.push.api import Push
 from smsapi.sender.api import Sender
 from smsapi.short_url.api import ShortUrl
 from smsapi.sms.api import Sms
@@ -37,7 +34,6 @@ class Client(object):
         self.sender = Sender(self)
         self.shorturl = ShortUrl(self)
         self.hlr = Hlr(self)
-        self.push = Push(self)
         self.blacklist = Blacklist(self)
 
 

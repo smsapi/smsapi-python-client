@@ -1,6 +1,6 @@
 .PHONY: dist tests
 
-PYTHON = python
+PYTHON = python3
 
 PROJECT := smsapi-client
 EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
