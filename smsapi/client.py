@@ -6,6 +6,7 @@ from smsapi.blacklist.api import Blacklist
 from smsapi.contacts.api import Contacts
 from smsapi.exception import ClientException
 from smsapi.hrl.api import Hlr
+from smsapi.mfa.api import Mfa
 from smsapi.mms.api import Mms
 from smsapi.sender.api import Sender
 from smsapi.short_url.api import ShortUrl
@@ -29,6 +30,7 @@ class Client(object):
         self.auth = BearerAuth(access_token) if access_token else HTTPBasicAuth(username, password)
 
         self.sms = Sms(self)
+        self.mfa = Mfa(self)
         self.account = Account(self)
         self.contacts = Contacts(self)
         self.sender = Sender(self)

@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.0
+- introduce MFA module
+---
+
 ## 2.8.0
 - remove push API
 ---
