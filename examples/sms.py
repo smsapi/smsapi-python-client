@@ -35,7 +35,3 @@ client.sms.send(to=['number1', 'number2'], message='some text [%1%]', param1=['1
 
 # send_sms_with_custom_sender_name
 client.sms.send(to='some-number', message='some text message', from_='your-custom-sender-name')
-
-client.sms.send_mfa(phone_number='some-number', content='Your code: [%code%]', fast=0)
-
-client.sms.verify_mfa(phone_number=phone, code=code) # Throws exception if code is invalid
