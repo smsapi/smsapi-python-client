@@ -183,17 +183,17 @@ class Contacts(Api):
 
     delete_custom_field = bind_api_endpoint(
         method='DELETE',
-        path='contacts/fields',
+        path='contacts/fields/{field_id}',
         exception_class=ContactsException,
         accept_parameters=['field_id']
     )
 
     update_custom_field = bind_api_endpoint(
         method='PUT',
-        path='contacts/fields',
+        path='contacts/fields/{field_id}',
         mapping=CustomFieldModel,
         exception_class=ContactsException,
-        accept_parameters=['name', 'type']
+        accept_parameters=['field_id', 'name']
     )
 
     unpin_contact_from_group_by_query = bind_api_endpoint(
@@ -212,7 +212,7 @@ class Contacts(Api):
 
     restore_contacts_in_trash = bind_api_endpoint(
         method='PUT',
-        path='contacts/trash',
+        path='contacts/trash/restore',
         exception_class=ContactsException
     )
 

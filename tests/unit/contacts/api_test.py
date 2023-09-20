@@ -98,8 +98,15 @@ class ContactsApiTest(SmsApiTestCase):
     def test_delete_custom_field(self):
         self.client.contacts.delete_custom_field(field_id=1)
 
+        self.assertEqual('DELETE', self.request_fake.http_method)
+        self.assertTrue(self.request_fake.url.endswith('contacts/fields/1'))
+
     def test_update_custom_field(self):
         self.client.contacts.update_custom_field(field_id=1, name='test_f')
+
+        self.assertEqual('PUT', self.request_fake.http_method)
+        self.assertTrue(self.request_fake.url.endswith('contacts/fields/1'))
+        self.assertRequestPayloadContains("name", "test_f")
 
     def test_unpin_contact_from_group_by_query(self):
         number, email = '100200300', 'some@email.com'
@@ -117,6 +124,9 @@ class ContactsApiTest(SmsApiTestCase):
 
     def test_restore_contacts_in_trash(self):
         self.client.contacts.restore_contacts_in_trash()
+
+        self.assertEqual('PUT', self.request_fake.http_method)
+        self.assertTrue(self.request_fake.url.endswith('contacts/trash/restore'))
 
     def test_clean_trash(self):
         self.client.contacts.clean_trash()

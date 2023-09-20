@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.1
+- fix broken contacts API endpoints
+---
+
 ## 2.9.0
 - introduce MFA module
 ---
