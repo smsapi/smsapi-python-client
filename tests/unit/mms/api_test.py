@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import unittest
 
 from smsapi.exception import EndpointException
@@ -42,6 +40,7 @@ class MmsApiTest(SmsApiTestCase):
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id='1')])
 
+        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_mms')

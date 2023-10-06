@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException, SendException
@@ -20,10 +18,18 @@ accept_parameters = [
 
 
 def parameters_transformer(_, parameters):
-
     join_params(parameters, ['idx'], '|')
 
     return parameters
+
+
+def delete_sms_params_transformer(_, parameters):
+    join_params(parameters, ['sch_del'])
+
+    if 'id' in parameters:
+        parameters['sch_del'] = parameters.pop('id')
+
+        return parameters
 
 
 class Mms(Api):
@@ -57,5 +63,5 @@ class Mms(Api):
         accept_parameters=['id'],
         force_parameters=response_format_param,
         exception_class=EndpointException,
-        parameters_transformer=parameters_transformer
+        parameters_transformer=delete_sms_params_transformer
     )

@@ -36,6 +36,15 @@ def parameters_transformer(api_endpoint, parameters):
     return parameters
 
 
+def delete_sms_params_transformer(_, parameters):
+    join_params(parameters, ['sch_del'])
+
+    if 'id' in parameters:
+        parameters['sch_del'] = parameters.pop('id')
+
+        return parameters
+
+
 class Vms(Api):
 
     path = 'vms.do'
@@ -66,6 +75,7 @@ class Vms(Api):
         mapping=(RemoveMessageResult, ResultCollection),
         accept_parameters=['id'],
         force_parameters=response_format_param,
-        exception_class=EndpointException
+        exception_class=EndpointException,
+        parameters_transformer=delete_sms_params_transformer
     )
 

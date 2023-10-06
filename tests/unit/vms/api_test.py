@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import unittest
 from smsapi.exception import EndpointException
@@ -58,13 +56,12 @@ class VmsApiTest(SmsApiTestCase):
 
     def test_remove_scheduled_vms(self):
         vms_id = '1'
-        args = {'id': vms_id}
 
-        result = self.client.vms.remove_scheduled(**args)
+        result = self.client.vms.remove_scheduled(id=vms_id)
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id=vms_id)])
 
-        self.assertParamsForwardedToRequestEquals(args)
+        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_vms')

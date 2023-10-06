@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.2
+- fix: wrong parameter passed to DELETE scheduled SMS,MMS,VMS API endpoints
+---
+
 ## 2.9.1
 - fix broken contacts API endpoints
 ---

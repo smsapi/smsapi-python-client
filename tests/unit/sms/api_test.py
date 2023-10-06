@@ -77,13 +77,12 @@ class SmsApiTest(SmsApiTestCase):
 
     def test_remove_scheduled_sms(self):
         sms_id = '1'
-        args = {'id': sms_id}
 
         result = self.client.sms.remove_scheduled(id=sms_id)
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id='1')])
 
-        self.assertParamsForwardedToRequestEquals(args)
+        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_sms')
