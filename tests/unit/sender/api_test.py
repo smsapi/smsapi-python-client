@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import unittest
 
 from smsapi.models import ResultCollection
@@ -17,8 +15,9 @@ class SenderApiTest(SmsApiTestCase):
 
         expected_result = SenderNameSuccessResult(1)
 
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'add': name})
+        self.assertRequestPayloadContains('add', name)
 
     @api_response_fixture('check_sender_name')
     def test_check_sender_name(self):
@@ -27,8 +26,9 @@ class SenderApiTest(SmsApiTestCase):
 
         expected_result = create_sender_name_result(name)
 
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'status': name})
+        self.assertRequestPayloadContains('status', name)
 
     @api_response_fixture('success_response')
     def test_remove_sender_name(self):
@@ -38,8 +38,9 @@ class SenderApiTest(SmsApiTestCase):
 
         expected_result = SenderNameSuccessResult(1)
 
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'delete': name})
+        self.assertRequestPayloadContains('delete', name)
 
     def test_list_sender_names(self):
         result = self.client.sender.list()
@@ -60,8 +61,9 @@ class SenderApiTest(SmsApiTestCase):
 
         expected_result = SenderNameSuccessResult(1)
 
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'default': name})
+        self.assertRequestPayloadContains('default', name)
 
 
 def create_sender_name_result(name):
@@ -69,6 +71,6 @@ def create_sender_name_result(name):
 
 
 def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(SenderApiTest))
-    return suite
+    s = unittest.TestSuite()
+    s.addTest(unittest.makeSuite(SenderApiTest))
+    return s

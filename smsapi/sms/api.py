@@ -76,7 +76,7 @@ class Sms(Api):
     )
 
     send_fast = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['to'],
@@ -86,7 +86,7 @@ class Sms(Api):
     )
 
     send_flash = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['to'],
@@ -96,7 +96,7 @@ class Sms(Api):
     )
 
     send_to_group = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(SendResult, SmsSendResult),
         accept_parameters=sms_parameters + ['group'],
@@ -106,7 +106,7 @@ class Sms(Api):
     )
 
     remove_scheduled = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(RemoveMessageResult, ResultCollection),
         accept_parameters=['id'],

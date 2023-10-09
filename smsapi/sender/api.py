@@ -21,7 +21,7 @@ class Sender(Api):
     path = 'sender.do'
 
     add = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=SenderNameSuccessResult,
         accept_parameters=['name'],
@@ -31,7 +31,7 @@ class Sender(Api):
     )
 
     check = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=SenderNameResult,
         accept_parameters=['name'],
@@ -41,7 +41,7 @@ class Sender(Api):
     )
 
     remove = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=SenderNameSuccessResult,
         accept_parameters=['name'],
@@ -59,7 +59,7 @@ class Sender(Api):
     )
 
     default = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=SenderNameSuccessResult,
         accept_parameters=['name'],

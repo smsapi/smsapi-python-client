@@ -70,7 +70,7 @@ class Vms(Api):
     )
 
     remove_scheduled = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(RemoveMessageResult, ResultCollection),
         accept_parameters=['id'],

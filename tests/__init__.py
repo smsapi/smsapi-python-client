@@ -55,6 +55,12 @@ class SmsApiTestCase(unittest.TestCase):
     def assertSmsSendResultForNumberEquals(self, number, result):
         self.assertSendResultForNumberEquals(number, result, result_class=SmsSendResult)
 
+    def assertRequestMethodIsPost(self):
+        self.assertEqual("POST", self.request_fake.http_method)
+
+    def assertRequestMethodIsPut(self):
+        self.assertEqual("PUT", self.request_fake.http_method)
+
 
 def spy_endpoints(client):
 

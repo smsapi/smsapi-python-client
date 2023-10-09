@@ -1,5 +1,6 @@
 import os
 import unittest
+
 from smsapi.exception import EndpointException
 from smsapi.models import ResultCollection, RemoveMessageResult
 from tests import SmsApiTestCase, create_send_result
@@ -61,8 +62,9 @@ class VmsApiTest(SmsApiTestCase):
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id=vms_id)])
 
-        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
+        self.assertRequestPayloadContains("sch_del", "1")
 
     @api_response_fixture('remove_not_exists_vms')
     def test_remove_not_exists_vms(self):
@@ -92,6 +94,6 @@ class VmsApiTest(SmsApiTestCase):
 
 
 def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(VmsApiTest))
-    return suite
+    s = unittest.TestSuite()
+    s.addTest(unittest.makeSuite(VmsApiTest))
+    return s

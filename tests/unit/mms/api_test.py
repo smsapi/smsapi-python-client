@@ -11,37 +11,38 @@ class MmsApiTest(SmsApiTestCase):
     def test_send_mms(self):
         number = '48100200300'
 
-        args = {'to': number, 'smil': 'any', 'subject': 'any'}
+        result = self.client.mms.send(to=number, smil='any', subject='any')
 
-        result = self.client.mms.send(**args)
-
+        self.assertRequestMethodIsPost()
         self.assertSendResultForNumberEquals(number, result)
-        self.assertParamsForwardedToRequestEquals(args)
+        self.assertRequestPayloadContains("to", number)
+        self.assertRequestPayloadContains("smil", 'any')
+        self.assertRequestPayloadContains("subject", 'any')
+
 
     def test_send_personalized_mms(self):
         number = '48100200300'
 
-        args = {'to': number, 'idx': ['id1', 'id2']}
+        self.client.mms.send(to=number, idx= ['id1', 'id2'])
 
-        self.client.mms.send(**args)
-
-        self.assertParamsForwardedToRequestEquals(args, {'idx': 'id1|id2'})
+        self.assertRequestMethodIsPost()
+        self.assertRequestPayloadContains("idx", "id1|id2")
 
     @api_response_fixture('send')
     def test_send_mms_to_group(self):
-        args = {'group': 'any'}
+        self.client.mms.send_to_group(group="any")
 
-        self.client.mms.send_to_group(**args)
-
-        self.assertParamsForwardedToRequestEquals(args)
+        self.assertRequestMethodIsPost()
+        self.assertRequestPayloadContains("group", "any")
 
     def test_remove_scheduled_mms(self):
         result = self.client.mms.remove_scheduled(id='1')
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id='1')])
 
-        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
+        self.assertRequestPayloadContains("sch_del", "1")
 
     @api_response_fixture('remove_not_exists_mms')
     def test_remove_not_exists_mms(self):
@@ -62,10 +63,10 @@ class MmsApiTest(SmsApiTestCase):
 
         self.client.mms.send(**args)
 
-        self.assertParamsForwardedToRequestEquals(args)
-
+        self.assertRequestMethodIsPost()
+        self.assertRequestPayloadContains("test", "1")
 
 def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(MmsApiTest))
-    return suite
+    s = unittest.TestSuite()
+    s.addTest(unittest.makeSuite(MmsApiTest))
+    return s

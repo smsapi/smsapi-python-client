@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import unittest
+
 from smsapi.account.models import AccountBalanceResult, UserResult
 from smsapi.models import ResultCollection
 
@@ -15,12 +14,12 @@ class AccountApiTest(SmsApiTestCase):
         result = self.client.account.balance()
 
         expected_result = AccountBalanceResult(
-            points = 100.00,
-            pro_count = 606,
-            eco_count = 1428,
-            mms_count = 333,
-            vms_gsm_count = 476,
-            vms_land_count = 714
+            points=100.00,
+            pro_count=606,
+            eco_count=1428,
+            mms_count=333,
+            vms_gsm_count=476,
+            vms_land_count=714
         )
 
         self.assertParamsForwardedToRequestEquals({'credits': 1, 'details': 1})
@@ -34,8 +33,11 @@ class AccountApiTest(SmsApiTestCase):
 
         expected_result = create_user_result()
 
+        self.assertRequestMethodIsPost()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'add_user': name, 'pass': password, 'pass_api': api_password})
+        self.assertRequestPayloadContains('add_user', name)
+        self.assertRequestPayloadContains('pass', password)
+        self.assertRequestPayloadContains('pass_api', api_password)
 
     @api_response_fixture('user', 'account')
     def test_update_user(self):
@@ -45,8 +47,10 @@ class AccountApiTest(SmsApiTestCase):
 
         expected_result = create_user_result()
 
+        self.assertRequestMethodIsPut()
         self.assertEqual(expected_result, result)
-        self.assertParamsForwardedToRequestEquals({'set_user': name, 'pass': password})
+        self.assertRequestPayloadContains('set_user', name)
+        self.assertRequestPayloadContains('pass', password)
 
     @api_response_fixture('user', 'account')
     def test_get_user(self):
@@ -61,7 +65,6 @@ class AccountApiTest(SmsApiTestCase):
 
     @api_response_fixture('users_list', 'account')
     def test_list_users(self):
-
         result = self.client.account.list_users()
 
         expected_result = ResultCollection(2, [

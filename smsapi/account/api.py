@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from smsapi.account.models import AccountBalanceResult, UserResult
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
@@ -58,7 +56,7 @@ class Account(Api):
     )
 
     create_user = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=UserResult,
         accept_parameters=accept_parameters,
@@ -68,7 +66,7 @@ class Account(Api):
     )
 
     update_user = bind_api_endpoint(
-        method='GET',
+        method='PUT',
         path=path,
         mapping=UserResult,
         accept_parameters=accept_parameters,

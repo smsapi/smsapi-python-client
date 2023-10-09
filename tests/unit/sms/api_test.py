@@ -63,6 +63,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send_fast(**args)
 
+        self.assertRequestMethodIsPost()
         self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args, fast_force_params)
 
@@ -72,6 +73,7 @@ class SmsApiTest(SmsApiTestCase):
 
         result = self.client.sms.send_flash(**args)
 
+        self.assertRequestMethodIsPost()
         self.assertSmsSendResultForNumberEquals(number, result)
         self.assertParamsForwardedToRequestEquals(args, flash_force_params)
 
@@ -82,7 +84,8 @@ class SmsApiTest(SmsApiTestCase):
 
         expected_result = ResultCollection(1, [RemoveMessageResult(id='1')])
 
-        self.assertParamsForwardedToRequestEquals({"sch_del": "1"})
+        self.assertRequestMethodIsPost()
+        self.assertRequestPayloadContains("sch_del", "1")
         self.assertEqual(expected_result, result)
 
     @api_response_fixture('remove_not_exists_sms')

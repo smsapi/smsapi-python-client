@@ -37,7 +37,7 @@ class Mms(Api):
     path = 'mms.do'
 
     send = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(SendResult, ResultCollection),
         accept_parameters=accept_parameters + ['to'],
@@ -47,7 +47,7 @@ class Mms(Api):
     )
 
     send_to_group = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(SendResult, ResultCollection),
         accept_parameters=accept_parameters + ['group'],
@@ -57,7 +57,7 @@ class Mms(Api):
     )
 
     remove_scheduled = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=(RemoveMessageResult, ResultCollection),
         accept_parameters=['id'],

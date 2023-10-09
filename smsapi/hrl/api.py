@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from smsapi.api import Api
 from smsapi.endpoint import bind_api_endpoint
 from smsapi.exception import EndpointException
@@ -29,7 +27,7 @@ class Hlr(Api):
     path = 'hlr.do'
 
     check_number = bind_api_endpoint(
-        method='GET',
+        method='POST',
         path=path,
         mapping=HlrResult,
         accept_parameters=['number', 'idx'],
