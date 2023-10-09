@@ -8,9 +8,10 @@ access_token = os.getenv('SMSAPI_ACCESS_TOKEN')
 client = SmsApiPlClient(access_token=access_token)
 
 # send single sms
-result = client.sms.send(to='some-number', message='some text message')
+results = client.sms.send(to='some-number', message='some text message')
 
-print(result[0].id, result[0].points, result[0].status)
+for result in results:
+    print(result.id, result.points, result.error)
 
 # send sms to many numbers
 results = client.sms.send(to=['123-123-123', '321-321-321'], message='some text message')
