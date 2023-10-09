@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.3
+- update API HTTP methods
+---
+
 ## 2.9.2
 - fix: wrong parameter passed to DELETE scheduled SMS,MMS,VMS API endpoints
 ---
