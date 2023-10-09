@@ -1,6 +1,6 @@
 import unittest
 
-from smsapi.hrl.api import HlrResult
+from smsapi.hlr.api import HlrResult
 from tests import SmsApiTestCase
 
 

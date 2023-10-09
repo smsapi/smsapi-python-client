@@ -5,7 +5,7 @@ from smsapi.auth import BearerAuth
 from smsapi.blacklist.api import Blacklist
 from smsapi.contacts.api import Contacts
 from smsapi.exception import ClientException
-from smsapi.hrl.api import Hlr
+from smsapi.hlr.api import Hlr
 from smsapi.mfa.api import Mfa
 from smsapi.mms.api import Mms
 from smsapi.sender.api import Sender

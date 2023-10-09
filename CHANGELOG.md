@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.4
+- fix module name typo
+---
+
 ## 2.9.3
 - update API HTTP methods
 ---
