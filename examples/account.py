@@ -1,5 +1,5 @@
-
 import os
+from hashlib import md5
 
 from smsapi.client import SmsApiPlClient
 
@@ -18,28 +18,30 @@ def get_account_balance():
 
 def create_user():
     r = client.account.create_user(
-        name='some username',
-        password='password',
-        api_password='api password',
+        name='some_user',
+        password='d03444aa8b114fa3d1b8a3a2593c848a',
+        api_password='67e8a30195188587421ba43fb8d9f20f',
         limit=1000,
         month_limit=100,
-        senders=False,
-        phonebook=False,
-        active=True,
+        senders=0,
+        phonebook=0,
+        active=1,
         info='some description',
-        without_prefix=True)
+        without_prefix=1)
 
     print(r.username, r.limit, r.month_limit, r.senders, r.phonebook, r.active, r.info)
 
 
 def get_user():
-    r = client.account.create_user(name='some username')
+    r = client.account.user(name='some_user', without_prefix=1)
 
     print(r.username, r.limit, r.month_limit, r.senders, r.phonebook, r.active, r.info)
 
 
 def update_user():
-    r = client.account.create_user(name='some username', password='password')
+    new_password = md5("new-password".encode("utf-8")).hexdigest()
+
+    r = client.account.update_user(name='some_user', password=new_password, without_prefix=1)
 
     print(r.username, r.limit, r.month_limit, r.senders, r.phonebook, r.active, r.info)
 
@@ -48,4 +50,4 @@ def list_users():
     r = client.account.list_users()
 
     for u in r:
-        print(r.username, r.limit, r.month_limit, r.senders, r.phonebook, r.active, r.info)
+        print(u.username, u.limit, u.month_limit, u.senders, u.phonebook, u.active, u.info)

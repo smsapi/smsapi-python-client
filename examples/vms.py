@@ -1,4 +1,3 @@
-
 import os
 
 from smsapi.client import SmsApiPlClient
@@ -15,7 +14,7 @@ def basic_send_vms():
 
 
 def send_vms_from_file():
-    client.vms.send_flash(to='some-number', file='/path/to/vms/file')
+    client.vms.send(to='some-number', file='/path/to/vms/file')
 
 
 def send_vms_to_contacts_group():

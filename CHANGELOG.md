@@ -1,5 +1,10 @@
 # Changes
 
+## 2.9.5
+- fix examples
+- support "without_prefix" parameter in account API `user` method
+---
+
 ## 2.9.4
 - fix module name typo
 ---

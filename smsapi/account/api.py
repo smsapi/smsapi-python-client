@@ -49,7 +49,7 @@ class Account(Api):
         method='GET',
         path=path,
         mapping=UserResult,
-        accept_parameters=['name'],
+        accept_parameters=['without_prefix', 'name'],
         force_parameters=response_format_param,
         exception_class=EndpointException,
         parameters_transformer=parameters_transformer({'name': 'get_user'})
