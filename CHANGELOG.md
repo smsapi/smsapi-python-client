@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.6
+- fix for python 3.12 - re.compile SyntaxWarning
+---
+
 ## 2.9.5
 - fix examples
 - support "without_prefix" parameter in account API `user` method

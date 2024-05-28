@@ -11,7 +11,6 @@ from .exception import EndpointException
 
 
 def bind_api_endpoint(**config):
-
     class ApiEndpoint(object):
 
         method = config.get('method')
@@ -61,7 +60,7 @@ def bind_api_endpoint(**config):
 
         def compile_path(self):
 
-            placeholder_pattern = re.compile('{\w+}')
+            placeholder_pattern = re.compile(r'{\w+}')
 
             for placeholder in placeholder_pattern.findall(self.path):
                 name = placeholder.strip('{}')
