@@ -1,4 +1,4 @@
-.PHONY: dist tests
+.PHONY: dist tests build-deps release-deps
 
 PYTHON = python3
 
@@ -8,7 +8,7 @@ EGG_INFO := $(subst -,_,$(PROJECT)).egg-info
 
 venv:
 	@${PYTHON} --version || (echo "Python is not installed."; exit 1)
-	virtualenv --python=${PYTHON} venv
+	${PYTHON} -m venv venv
 
 
 install: venv
@@ -34,10 +34,18 @@ clean:
 clean-all: clean clean-venv
 
 
-dist: clean
+build-deps: venv
+	. venv/bin/activate; pip install --upgrade setuptools wheel
+
+
+release-deps: venv
+	. venv/bin/activate; pip install --upgrade twine
+
+
+dist: clean build-deps
 	. venv/bin/activate; python setup.py sdist
 	. venv/bin/activate; python setup.py bdist_wheel
 
 
-release: dist
+release: dist release-deps
 	. venv/bin/activate; python -m twine upload dist/*
