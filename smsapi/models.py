@@ -148,7 +148,13 @@ class InvalidNumber(object):
         return cls(data.get('number'), data.get('submitted_number'), data.get('message'))
 
     def __eq__(self, other):
-        return other and self.__dict__ == other.__dict__
+        if other is None:
+            return False
+        if isinstance(other, dict):
+            return self.__dict__ == other
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        return False
 
 
 class HeaderDirectResult(object):
