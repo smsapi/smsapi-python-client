@@ -1,5 +1,9 @@
 # Changes
 
+## 2.9.7
+- fix `InvalidNumber.__eq__` to handle dict comparison
+---
+
 ## 2.9.6
 - fix for python 3.12 - re.compile SyntaxWarning
 ---
